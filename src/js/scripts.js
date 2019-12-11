@@ -36,8 +36,8 @@ function sendForm(btnSend) {
 		var item = $(inputs).eq(i);
 
 		if (
-			(item.hasClass('js-form-text') && checkVal(item.val())) ||
-			(item.hasClass('js-form-mail') && validateEmail(item.val())) // ||
+			(item.hasClass('js-form-text') && checkVal(item.val())) // ||
+			// (item.hasClass('js-form-mail') && validateEmail(item.val())) ||
 			// (item.hasClass('js-form-phone') && !item.inputmask("isComplete"))
 		) {
 			if (first) item.focus();
@@ -68,21 +68,27 @@ function ajaxSend(btn, callback) {
 	var btnSend = $(btn);
 	var form = btnSend.parents('.js-form');
 	var action = form.attr('action');
+	var dataRequest = {};
+
+	form.find('input, textarea, select').each(function() {
+		dataRequest[this.name] = $(this).val();
+	})
 
 	if (!btnSend.hasClass('disabled')) {
 		btnSend.addClass('disabled');
 
 		// ! включить при работе на сервере вместо setTimeout(...)
-		// $.post(action, form.serialize(), function (data) {
-		// 	callback(btnSend);
-		// });
+		$.post(action, JSON.stringify(dataRequest), function (dataResponsive) {
+			console.log(JSON.stringify(dataRequest));
+			console.log(JSON.parse(dataResponsive));
+
+			callback(btnSend);
+		});
 
 		// ! DELETE (временная замена ajax запроса-ответа)
-		setTimeout(function () {
-			console.log(action);
-			console.log(form.serialize());
-			callback(btnSend);
-		}, 1500);
+		// setTimeout(function () {
+		// 	callback(btnSend);
+		// }, 1500);
 	}
 }
 

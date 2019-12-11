@@ -227,7 +227,40 @@ function watch () {
 		server: {
 			baseDir: './build/'
 		},
-		ghostMode: false, // синхронизация между браузерами
+		middleware: [
+			{
+				route: "/ajax",
+				handle: function (req, res, next) {
+					let resData;
+					console.log(req.url);
+
+					req.setEncoding('utf8');
+
+					req.on('data', (chunk) => {
+						resData = JSON.parse(chunk);
+						console.log(resData);
+					});
+
+					req.on('end', () => {
+						try {
+							const data = JSON.stringify(resData);
+							res.write(data);
+							res.end();
+						} catch (error) {
+							res.statusCode = 400;
+							return res.end(`error: ${error.message}`);
+						}
+					});
+				}
+			}
+		],
+		ghostMode: {
+			clicks: false,
+			forms: false,
+			scroll: false
+		}, // синхронизация между браузерами
+		// tunnel: true,
+		notify: true
 	});
 
 	gulp.watch('./src/pug/**/*.*', views);

@@ -32,7 +32,6 @@
 }
 
 .modalWindow__window {
-	width: 1200px;
 	max-height: 100%;
 	max-width: calc(100% - 60px);
 	position: relative;
@@ -42,12 +41,8 @@
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
 	border-radius: 7px;
 	padding: 70px 50px;
-	@include max1439-block{
-		width: 1000px;
-	}
 	@include max1229-block{
-		width: 700px;
-		padding: 30px 15px;
+		padding: 30px;
 	}
 	@include max575-block{
 		padding: 45px 15px 30px;
@@ -85,11 +80,14 @@
 .modalWindow__result {
 	text-align: center;
 	font-weight: 700;
-	font-size: 40px;
+	font-size: 32px;
 	line-height: 1.5;
 	margin-bottom: 45px;
-	@include max1229-block{
+	@include max1889-block{
 		font-size: 28px;
+	}
+	@include max1229-block{
+		font-size: 24px;
 		margin-bottom: 20px;
 		padding-top: 20px;
 	}
@@ -107,6 +105,7 @@
 	&_modal {
 		display: flex;
 		flex-wrap: wrap;
+		margin: 0 -15px;
 	}
 }
 
@@ -148,7 +147,8 @@
 	background-color: rgba(195, 207, 219, 0.1);
 	display: block;
 	width: 100%;
-	padding: 20px 25px;
+	padding: 15px 25px;
+	line-height: 1.5;
 	font-size: 16px;
 	color: #000;
 	font-weight: bold;
@@ -156,10 +156,10 @@
 	&_textarea {
 		height: 100%;
 		@include max1229-block{
-			height: 128px;
+			height: 116px;
 		}
 		@include max575-block{
-			height: 96px;
+			height: 104px;
 		}
 	}
 	&_modal {
@@ -173,8 +173,10 @@
 	&.error {
 		background-color: rgba(238, 0, 0, 0.1);
 	}
-	@include max575-block{
+	@include max1229-block{
 		padding: 10px 15px;
+	}
+	@include max575-block{
 		font-size: 14px;
 	}
 }
