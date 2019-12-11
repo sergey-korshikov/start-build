@@ -1,0 +1,79 @@
+.modalWindow.js-modal(data-modal-name="write")
+	.modalWindow__wrap
+		a.modalWindow__overlay.js-modal-close(href="#")
+
+		.modalWindow__window
+			a.modalWindow__close.crossClose.js-modal-close(href="#")
+			.modalWindow__title Напишите нам
+			form.modalWindow__form.form.form_modal.js-form(action="/server/write.js", method="post")
+				.form__block
+					.form__line
+						input.form__input.form__input_modal.js-form-text(type="text", name="name", placeholder="Имя", autocomplete="off")
+					.form__line
+						input.form__input.form__input_modal.js-form-mail(type="text", name="mail", placeholder="E-mail", autocomplete="off")
+					.form__line
+						input.form__input.form__input_modal.js-form-phone(type="text", name="phone", placeholder="Телефон", autocomplete="off")
+
+				.form__block
+					textarea.form__input.form__input_modal.form__input_textarea.js-form-text(name="message", placeholder="Вопрос", autocomplete="off")
+
+				.form__wrapBtn
+					button.button.js-form-send(type="submit", data-modal-name="result")
+						span Отправить
+
+.modalWindow.js-modal(data-modal-name="buyNow")
+	.modalWindow__wrap
+		a.modalWindow__overlay.js-modal-close(href="#")
+
+		.modalWindow__window
+			a.modalWindow__close.crossClose.js-modal-close(href="#")
+			.modalWindow__title Купить
+			form.modalWindow__form.form.form_modal.js-form(action="/server/write.js", method="post")
+				.form__block
+					.form__line
+						input.form__input.form__input_modal.js-form-text(type="text", name="name", placeholder="Имя", autocomplete="off")
+					.form__line
+						input.form__input.form__input_modal.js-form-mail(type="text", name="mail", placeholder="E-mail", autocomplete="off")
+					.form__line
+						input.form__input.form__input_modal.js-form-phone(type="text", name="phone", placeholder="Телефон", autocomplete="off")
+
+				.form__block
+					textarea.form__input.form__input_modal.form__input_textarea.js-form-text(name="message", placeholder="Вопрос", autocomplete="off")
+
+				.form__wrapBtn
+					button.button.js-form-send(type="submit", data-modal-name="result")
+						span Отправить
+
+.modalWindow.js-modal(data-modal-name="order")
+	.modalWindow__wrap
+		a.modalWindow__overlay.js-modal-close(href="#")
+
+		.modalWindow__window
+			a.modalWindow__close.crossClose.js-modal-close(href="#")
+			.modalWindow__title Заказать
+			form.modalWindow__form.form.form_modal.js-form(action="/server/write.php", method="post")
+				.form__block
+					.form__line
+						input.form__input.form__input_modal.js-form-text(type="text", name="name", placeholder="Имя", autocomplete="off")
+					.form__line
+						input.form__input.form__input_modal.js-form-mail(type="text", name="mail", placeholder="E-mail", autocomplete="off")
+					.form__line
+						input.form__input.form__input_modal.js-form-phone(type="text", name="phone", placeholder="Телефон", autocomplete="off")
+
+				.form__block
+					textarea.form__input.form__input_modal.form__input_textarea.js-form-text(name="message", placeholder="Вопрос", autocomplete="off")
+
+				.form__wrapBtn
+					button.button.js-form-send(type="submit", data-modal-name="result")
+						span Отправить
+
+.modalWindow.js-modal(data-modal-name="result")
+	.modalWindow__wrap
+		a.modalWindow__overlay.js-modal-close(href="#")
+
+		.modalWindow__window
+			a.modalWindow__close.crossClose.js-modal-close(href="#")
+			.modalWindow__result Ваше обращение передано менеджеру, ожидайте пожалуйста обратной связи
+			.form__wrapBtn
+				button.button.js-modal-close(type="submit")
+					span Закрыть

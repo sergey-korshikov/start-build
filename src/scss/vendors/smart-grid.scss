@@ -1,0 +1,531 @@
+$columns: 12;
+$atom: (100% / $columns);
+
+$break_max1889: 1889px;
+$break_max1439: 1439px;
+$break_max1229: 1229px;
+$break_max991: 991px;
+$break_max767: 767px;
+$break_max575: 575px;
+
+$offset: 30px;
+$offset_max1889: $offset;
+$offset_max1439: $offset;
+$offset_max1229: $offset;
+$offset_max991: $offset;
+$offset_max767: $offset;
+$offset_max575: $offset;
+
+$offset_one_side: ($offset / 2);
+$offset_max1889_one_side: ($offset_max1889 / 2);
+$offset_max1439_one_side: ($offset_max1439 / 2);
+$offset_max1229_one_side: ($offset_max1229 / 2);
+$offset_max991_one_side: ($offset_max991 / 2);
+$offset_max767_one_side: ($offset_max767 / 2);
+$offset_max575_one_side: ($offset_max575 / 2);
+
+$fields: 30px;
+
+@mixin wrapper-full(){
+    padding-left: $fields;
+    padding-right: $fields;
+}
+
+@mixin row-offsets(){
+    margin-left: ($offset_one_side * -1);
+    margin-right: ($offset_one_side * -1);
+}
+
+@mixin col-offsets($type){
+    #{$type}-left: $offset_one_side;
+    #{$type}-right: $offset_one_side;
+}
+
+@mixin wrapper(){
+    max-width: 1860px;
+    margin: 0 auto;
+    @include wrapper-full();
+}
+
+@mixin row-flex(){
+    display: flex;
+    flex-wrap: wrap;
+    @include row-offsets();
+}
+
+@mixin row-float(){
+    @include row-offsets();
+    @include clearfix();
+}
+
+@mixin row-ib(){
+    @include row-offsets();
+}
+
+@mixin col(){
+    box-sizing: border-box;
+    word-wrap: break-word;
+    @include col-offsets(margin);
+}
+
+@mixin col-float(){
+    float: left;
+}
+
+@mixin col-ib(){
+    display: inline-block;
+    vertical-align: top;
+}
+
+@mixin col-padding(){
+    word-wrap: break-word;
+    @include col-offsets(padding);
+}
+
+@mixin size($n){
+    $val: 100% / $columns * $n;
+    width: #{calc(#{$val} - #{$offset})};
+}
+
+@mixin size-max1889($n){
+    $val: 100% / $columns * $n;
+    @include max1889(width, #{calc(#{$val} - #{$offset_max1889})});
+}
+
+@mixin size-max1439($n){
+    $val: 100% / $columns * $n;
+    @include max1439(width, #{calc(#{$val} - #{$offset_max1439})});
+}
+
+@mixin size-max1229($n){
+    $val: 100% / $columns * $n;
+    @include max1229(width, #{calc(#{$val} - #{$offset_max1229})});
+}
+
+@mixin size-max991($n){
+    $val: 100% / $columns * $n;
+    @include max991(width, #{calc(#{$val} - #{$offset_max991})});
+}
+
+@mixin size-max767($n){
+    $val: 100% / $columns * $n;
+    @include max767(width, #{calc(#{$val} - #{$offset_max767})});
+}
+
+@mixin size-max575($n){
+    $val: 100% / $columns * $n;
+    @include max575(width, #{calc(#{$val} - #{$offset_max575})});
+}
+
+@mixin shift($n){
+    $val: 100% / $columns * $n;
+    margin-left: #{calc(#{$val} + #{$offset_one_side})};
+    margin-right: #{calc(#{$val} + #{$offset_one_side})};
+}
+
+@mixin shift-left($n){
+    $val: 100% / $columns * $n;
+    margin-left: #{calc(#{$val} + #{$offset_one_side})};
+}
+
+@mixin shift-right($n){
+    $val: 100% / $columns * $n;
+    margin-right: #{calc(#{$val} + #{$offset_one_side})};
+}
+
+@mixin shift-padding($n){
+    $val: 100% / $columns * $n;
+    padding-left: #{calc(#{$val} + #{$offset_one_side})};
+    padding-right: #{calc(#{$val} + #{$offset_one_side})};
+}
+
+@mixin shift-padding-left($n){
+    $val: 100% / $columns * $n;
+    padding-left: #{calc(#{$val} + #{$offset_one_side})};
+}
+
+@mixin shift-padding-right($n){
+    $val: 100% / $columns * $n;
+    padding-right: #{calc(#{$val} + #{$offset_one_side})};
+}
+
+@mixin shift-max1889($n){
+    $val: 100% / $columns * $n;
+    @include max1889(margin-left, #{calc(#{$val} + #{$offset_max1889_one_side})});
+    @include max1889(margin-right, #{calc(#{$val} + #{$offset_max1889_one_side})});
+}
+
+@mixin shift-max1889-left($n){
+    $val: 100% / $columns * $n;
+    @include max1889(margin-left, #{calc(#{$val} + #{$offset_max1889_one_side})});
+}
+
+@mixin shift-max1889-right($n){
+    $val: 100% / $columns * $n;
+    @include max1889(margin-right, #{calc(#{$val} + #{$offset_max1889_one_side})});
+}
+
+@mixin shift-max1889-padding($n){
+    $val: 100% / $columns * $n;
+    @include max1889(padding-left, #{calc(#{$val} + #{$offset_max1889_one_side})});
+    @include max1889(padding-right, #{calc(#{$val} + #{$offset_max1889_one_side})});
+}
+
+@mixin shift-max1889-padding-left($n){
+    $val: 100% / $columns * $n;
+    @include max1889(padding-left, #{calc(#{$val} + #{$offset_max1889_one_side})});
+}
+
+@mixin shift-max1889-padding-right($n){
+    $val: 100% / $columns * $n;
+    @include max1889(padding-right, #{calc(#{$val} + #{$offset_max1889_one_side})});
+}
+
+@mixin shift-max1439($n){
+    $val: 100% / $columns * $n;
+    @include max1439(margin-left, #{calc(#{$val} + #{$offset_max1439_one_side})});
+    @include max1439(margin-right, #{calc(#{$val} + #{$offset_max1439_one_side})});
+}
+
+@mixin shift-max1439-left($n){
+    $val: 100% / $columns * $n;
+    @include max1439(margin-left, #{calc(#{$val} + #{$offset_max1439_one_side})});
+}
+
+@mixin shift-max1439-right($n){
+    $val: 100% / $columns * $n;
+    @include max1439(margin-right, #{calc(#{$val} + #{$offset_max1439_one_side})});
+}
+
+@mixin shift-max1439-padding($n){
+    $val: 100% / $columns * $n;
+    @include max1439(padding-left, #{calc(#{$val} + #{$offset_max1439_one_side})});
+    @include max1439(padding-right, #{calc(#{$val} + #{$offset_max1439_one_side})});
+}
+
+@mixin shift-max1439-padding-left($n){
+    $val: 100% / $columns * $n;
+    @include max1439(padding-left, #{calc(#{$val} + #{$offset_max1439_one_side})});
+}
+
+@mixin shift-max1439-padding-right($n){
+    $val: 100% / $columns * $n;
+    @include max1439(padding-right, #{calc(#{$val} + #{$offset_max1439_one_side})});
+}
+
+@mixin shift-max1229($n){
+    $val: 100% / $columns * $n;
+    @include max1229(margin-left, #{calc(#{$val} + #{$offset_max1229_one_side})});
+    @include max1229(margin-right, #{calc(#{$val} + #{$offset_max1229_one_side})});
+}
+
+@mixin shift-max1229-left($n){
+    $val: 100% / $columns * $n;
+    @include max1229(margin-left, #{calc(#{$val} + #{$offset_max1229_one_side})});
+}
+
+@mixin shift-max1229-right($n){
+    $val: 100% / $columns * $n;
+    @include max1229(margin-right, #{calc(#{$val} + #{$offset_max1229_one_side})});
+}
+
+@mixin shift-max1229-padding($n){
+    $val: 100% / $columns * $n;
+    @include max1229(padding-left, #{calc(#{$val} + #{$offset_max1229_one_side})});
+    @include max1229(padding-right, #{calc(#{$val} + #{$offset_max1229_one_side})});
+}
+
+@mixin shift-max1229-padding-left($n){
+    $val: 100% / $columns * $n;
+    @include max1229(padding-left, #{calc(#{$val} + #{$offset_max1229_one_side})});
+}
+
+@mixin shift-max1229-padding-right($n){
+    $val: 100% / $columns * $n;
+    @include max1229(padding-right, #{calc(#{$val} + #{$offset_max1229_one_side})});
+}
+
+@mixin shift-max991($n){
+    $val: 100% / $columns * $n;
+    @include max991(margin-left, #{calc(#{$val} + #{$offset_max991_one_side})});
+    @include max991(margin-right, #{calc(#{$val} + #{$offset_max991_one_side})});
+}
+
+@mixin shift-max991-left($n){
+    $val: 100% / $columns * $n;
+    @include max991(margin-left, #{calc(#{$val} + #{$offset_max991_one_side})});
+}
+
+@mixin shift-max991-right($n){
+    $val: 100% / $columns * $n;
+    @include max991(margin-right, #{calc(#{$val} + #{$offset_max991_one_side})});
+}
+
+@mixin shift-max991-padding($n){
+    $val: 100% / $columns * $n;
+    @include max991(padding-left, #{calc(#{$val} + #{$offset_max991_one_side})});
+    @include max991(padding-right, #{calc(#{$val} + #{$offset_max991_one_side})});
+}
+
+@mixin shift-max991-padding-left($n){
+    $val: 100% / $columns * $n;
+    @include max991(padding-left, #{calc(#{$val} + #{$offset_max991_one_side})});
+}
+
+@mixin shift-max991-padding-right($n){
+    $val: 100% / $columns * $n;
+    @include max991(padding-right, #{calc(#{$val} + #{$offset_max991_one_side})});
+}
+
+@mixin shift-max767($n){
+    $val: 100% / $columns * $n;
+    @include max767(margin-left, #{calc(#{$val} + #{$offset_max767_one_side})});
+    @include max767(margin-right, #{calc(#{$val} + #{$offset_max767_one_side})});
+}
+
+@mixin shift-max767-left($n){
+    $val: 100% / $columns * $n;
+    @include max767(margin-left, #{calc(#{$val} + #{$offset_max767_one_side})});
+}
+
+@mixin shift-max767-right($n){
+    $val: 100% / $columns * $n;
+    @include max767(margin-right, #{calc(#{$val} + #{$offset_max767_one_side})});
+}
+
+@mixin shift-max767-padding($n){
+    $val: 100% / $columns * $n;
+    @include max767(padding-left, #{calc(#{$val} + #{$offset_max767_one_side})});
+    @include max767(padding-right, #{calc(#{$val} + #{$offset_max767_one_side})});
+}
+
+@mixin shift-max767-padding-left($n){
+    $val: 100% / $columns * $n;
+    @include max767(padding-left, #{calc(#{$val} + #{$offset_max767_one_side})});
+}
+
+@mixin shift-max767-padding-right($n){
+    $val: 100% / $columns * $n;
+    @include max767(padding-right, #{calc(#{$val} + #{$offset_max767_one_side})});
+}
+
+@mixin shift-max575($n){
+    $val: 100% / $columns * $n;
+    @include max575(margin-left, #{calc(#{$val} + #{$offset_max575_one_side})});
+    @include max575(margin-right, #{calc(#{$val} + #{$offset_max575_one_side})});
+}
+
+@mixin shift-max575-left($n){
+    $val: 100% / $columns * $n;
+    @include max575(margin-left, #{calc(#{$val} + #{$offset_max575_one_side})});
+}
+
+@mixin shift-max575-right($n){
+    $val: 100% / $columns * $n;
+    @include max575(margin-right, #{calc(#{$val} + #{$offset_max575_one_side})});
+}
+
+@mixin shift-max575-padding($n){
+    $val: 100% / $columns * $n;
+    @include max575(padding-left, #{calc(#{$val} + #{$offset_max575_one_side})});
+    @include max575(padding-right, #{calc(#{$val} + #{$offset_max575_one_side})});
+}
+
+@mixin shift-max575-padding-left($n){
+    $val: 100% / $columns * $n;
+    @include max575(padding-left, #{calc(#{$val} + #{$offset_max575_one_side})});
+}
+
+@mixin shift-max575-padding-right($n){
+    $val: 100% / $columns * $n;
+    @include max575(padding-right, #{calc(#{$val} + #{$offset_max575_one_side})});
+}
+
+@mixin max1889($name, $value){
+    @media screen and (max-width: $break_max1889){
+        #{$name}: $value;
+    }
+}
+
+@mixin max1889-block(){
+    @media screen and (max-width: $break_max1889){
+        @content;
+    }
+}
+
+@mixin max1439($name, $value){
+    @media screen and (max-width: $break_max1439){
+        #{$name}: $value;
+    }
+}
+
+@mixin max1439-block(){
+    @media screen and (max-width: $break_max1439){
+        @content;
+    }
+}
+
+@mixin max1229($name, $value){
+    @media screen and (max-width: $break_max1229){
+        #{$name}: $value;
+    }
+}
+
+@mixin max1229-block(){
+    @media screen and (max-width: $break_max1229){
+        @content;
+    }
+}
+
+@mixin max991($name, $value){
+    @media screen and (max-width: $break_max991){
+        #{$name}: $value;
+    }
+}
+
+@mixin max991-block(){
+    @media screen and (max-width: $break_max991){
+        @content;
+    }
+}
+
+@mixin max767($name, $value){
+    @media screen and (max-width: $break_max767){
+        #{$name}: $value;
+    }
+}
+
+@mixin max767-block(){
+    @media screen and (max-width: $break_max767){
+        @content;
+    }
+}
+
+@mixin max575($name, $value){
+    @media screen and (max-width: $break_max575){
+        #{$name}: $value;
+    }
+}
+
+@mixin max575-block(){
+    @media screen and (max-width: $break_max575){
+        @content;
+    }
+}
+
+@mixin from($min_width){
+    @media screen and (min-width: $min_width){
+        @content;
+    }
+}
+
+@mixin to($max_width){
+    @media screen and (max-width: $max_width){
+        @content;
+    }
+}
+
+@mixin from-to($min_width, $max_width){
+    @media screen and (min-width: $min_width) and (max-width: $max_width){
+        @content;
+    }
+}
+
+@mixin u-row-flex($offset){
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: ($offset / -2);
+    margin-right: ($offset / -2);
+}
+
+@mixin u-col($offset){
+    box-sizing: border-box;
+    word-wrap: break-word;
+    margin-left: ($offset / 2);
+    margin-right: ($offset / 2);
+}
+
+@mixin u-size($n, $columns, $offset){
+    width: #{calc(100% / #{$columns} * #{$n} - #{$offset})};
+}
+
+@mixin reset(){
+    body,div,dl,dt,dd,ul,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,input,textarea,p,blockquote,th,td{
+        margin: 0;
+        padding: 0;
+    }
+    table{
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    fieldset,img,abbr{
+        border: 0;
+    }
+    address,caption,cite,code,dfn,em,strong,th,var{
+        font-style: normal;
+        font-weight: normal;
+    }
+    ul li{
+        list-style: none;
+    }
+    caption,th{
+        text-align: left;
+    }
+    h1,h2,h3,h4,h5,h6{
+        font-size: 100%;
+        font-weight: normal;
+    }
+    sup{
+        vertical-align: text-top;
+    }
+    sub{
+        vertical-align: text-bottom;
+    }
+    input,textarea,select{
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+    }
+    legend{
+        color: #000;
+    }
+    article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,main{
+        display: block;
+    }
+    img{
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+@mixin debug($background, $outline){
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    
+    > div{
+        height: inherit;
+        @include wrapper();
+        
+        > div{
+            height: inherit;
+            @include row-flex();
+            
+            > div{
+                @include col();
+                @include size(1);
+                height: inherit;
+                outline: $outline;
+                background: $background;
+            }
+        }
+    }
+}
+
+@mixin clearfix(){
+    &::after{
+        display: block;
+        content: "";
+        clear: both;
+    }
+}
