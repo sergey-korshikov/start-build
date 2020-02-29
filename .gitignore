@@ -4,3 +4,5 @@ node_modules
 src/static
 build
 dev
+*.zip
+*.rar

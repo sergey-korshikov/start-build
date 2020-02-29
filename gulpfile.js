@@ -20,7 +20,7 @@ const srcStyleHelpers = [
 ];
 
 const srcStyleLibs = [
-	// './node_modules/inputmask/css/inputmask.css',
+	'./node_modules/inputmask/css/inputmask.css',
 	// './node_modules/slick-carousel/slick/slick.scss',
 	// './node_modules/slick-carousel/slick/slick-theme.scss',
 ];
@@ -40,8 +40,8 @@ const srcScripts = [
 
 const srcScriptLibs = [
 	'./node_modules/jquery/dist/jquery.min.js',
+	'./node_modules/inputmask/dist/min/jquery.inputmask.bundle.min.js',
 	// './node_modules/slick-carousel/slick/slick.min.js',
-	// './node_modules/inputmask/dist/min/jquery.inputmask.bundle.min.js',
 	// './src/js/libs/jquery.table-scrolling.js',
 ];
 

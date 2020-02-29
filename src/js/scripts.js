@@ -1,23 +1,44 @@
 'use strict';
-
 // modal windows and forms functions
 
-function openModal(self) {
-	var modalName = $(self).attr('data-modal-name');
-	var modal = $('.js-modal[data-modal-name="' + modalName + '"]');
+function checkModal(selector) {
+	let modalName = $(selector).attr('data-modal-name');
+	let modal = $('.js-modal[data-modal-name="' + modalName + '"]');
 
+	if (modal[0]) {
+
+		openModal(modal);
+
+	} else {
+		$.ajax({
+			url: $(selector).attr('data-modal-url'),
+			success: function(formHtml) {
+
+				$('.js-forms').append(formHtml);
+				initPhoneMask();
+				modal = $('.js-modal[data-modal-name="' + modalName + '"]');
+				openModal(modal);
+
+			}
+		});
+	}
+}
+
+function openModal(modal) {
 	modal[0] && fixed();
 	modal[0] && modal.fadeIn(200, function () {
 		modal.addClass('open');
 	});
 }
 
-function closeModal(self, otherForm, noUnfix) {
+function closeModal(selector, otherForm, noUnfix) {
+	let modal;
+
 	if (otherForm) {
-		var modalName = $(self).attr('data-modal-name');
-		var modal = $('.js-modal[data-modal-name="' + modalName + '"]');
+		let modalName = $(selector).attr('data-modal-name');
+		modal = $('.js-modal[data-modal-name="' + modalName + '"]');
 	} else {
-		var modal = $(self).parents('.js-modal');
+		modal = $(selector).parents('.js-modal');
 	}
 
 	modal[0] && modal.fadeOut(200, function () {
@@ -27,35 +48,21 @@ function closeModal(self, otherForm, noUnfix) {
 }
 
 function sendForm(btnSend) {
-	var first = true;
-	var error = false;
-	var form = $(btnSend).parents('.js-form');
-	var inputs = form.find('input, textarea');
+	let error = false;
+	let form = $(btnSend).parents('.js-form');
+	let inputs = form.find('input, textarea');
 
-	for (var i = 0; i < inputs.length; i++) {
-		var item = $(inputs).eq(i);
-
-		if (
-			(item.hasClass('js-form-text') && checkVal(item.val())) // ||
-			// (item.hasClass('js-form-mail') && validateEmail(item.val())) ||
-			// (item.hasClass('js-form-phone') && !item.inputmask("isComplete"))
-		) {
-			if (first) item.focus();
-			item.addClass('error');
-			first = false;
-			error = true;
-		}
-	}
+	error = checkForm(form);
 
 	if (!error) {
 		ajaxSend(btnSend, function (btnSend) {
-			var form = btnSend.parents('.js-form');
-			var inputs = form.find('input, textarea');
+			let form = btnSend.parents('.js-form');
+			let inputs = form.find('input, textarea');
 
 			inputs.val('');
 			btnSend.removeClass('disabled');
 			closeModal(btnSend, false, true);
-			openModal(btnSend);
+			checkModal(btnSend);
 
 			setTimeout(function () {
 				closeModal(btnSend, true);
@@ -64,11 +71,36 @@ function sendForm(btnSend) {
 	}
 }
 
+function checkForm(form, input) {
+	let error = false;
+	let first = true;
+	let inputs = form ? form.find('input, textarea') : $(input);
+
+	for (let i = 0; i < inputs.length; i++) {
+		let item = $(inputs).eq(i);
+
+		if (
+			(item.hasClass('js-form-text') && checkVal(item.val())) ||
+			(item.hasClass('js-form-mail') && validateEmail(item.val())) ||
+			(item.hasClass('js-form-phone') && !item.inputmask("isComplete"))
+		) {
+			// if (first) item.focus();
+			item.addClass('error');
+			first = false;
+			error = true;
+		} else {
+			item.removeClass('error');
+		}
+	}
+
+	return error;
+}
+
 function ajaxSend(btn, callback) {
-	var btnSend = $(btn);
-	var form = btnSend.parents('.js-form');
-	var action = form.attr('action');
-	var dataRequest = {};
+	let btnSend = $(btn);
+	let form = btnSend.parents('.js-form');
+	let action = form.attr('action');
+	let dataRequest = {};
 
 	form.find('input, textarea, select').each(function() {
 		dataRequest[this.name] = $(this).val();
@@ -77,7 +109,7 @@ function ajaxSend(btn, callback) {
 	if (!btnSend.hasClass('disabled')) {
 		btnSend.addClass('disabled');
 
-		// ! включить при работе на сервере вместо setTimeout(...)
+		// ! включить при работе на сервере, вместо setTimeout(...)
 		$.post(action, JSON.stringify(dataRequest), function (dataResponsive) {
 			console.log(JSON.stringify(dataRequest));
 			console.log(JSON.parse(dataResponsive));
@@ -92,12 +124,6 @@ function ajaxSend(btn, callback) {
 	}
 }
 
-function initPhoneMask() {
-	// $('.js-phone').inputmask({
-	// 	mask: ['7 999 999 99 99', '8 999 999 99 99']
-	// });
-}
-
 function checkVal(value) {
 	value = $.trim(value);
 	if (value === '') return true;
@@ -105,7 +131,7 @@ function checkVal(value) {
 }
 
 function validateEmail(email) {
-	var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 	if (reg.test(email) == false) return true;
 	return false;
 }
@@ -122,14 +148,19 @@ function unfixed() {
 	$('body').removeClass('fixed');
 }
 
+function initPhoneMask() {
+	$('.js-form-phone').inputmask({
+		mask: ['+7 (999) 999-99-99', '8 (999) 999-99-99']
+	});
+}
+
 $(document).ready(function () {
 	// init and events for modal windows and forms
-
 	initPhoneMask();
 
 	$(document).on('click', '.js-modal-open', function (e) {
 		e.preventDefault();
-		openModal(this);
+		checkModal(this);
 	});
 
 	$(document).on('click', '.js-modal-close', function (e) {
@@ -143,6 +174,11 @@ $(document).ready(function () {
 	});
 
 	$(document).on('input', 'input, textarea', function () {
-		$(this).removeClass('error');
+	// 	$(this).removeClass('error');
+		checkForm(false, this);
+	});
+
+	$(document).on('blur', 'input, textarea', function () {
+		checkForm($(this).parents('.js-form'));
 	});
 });
