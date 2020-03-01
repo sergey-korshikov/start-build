@@ -31,10 +31,10 @@ function openModal(modal) {
 	});
 }
 
-function closeModal(selector, otherForm, noUnfix) {
+function closeModal(selector, linkForm, noUnfix) {
 	let modal;
 
-	if (otherForm) {
+	if (linkForm) {
 		let modalName = $(selector).attr('data-modal-name');
 		modal = $('.js-modal[data-modal-name="' + modalName + '"]');
 	} else {
@@ -48,11 +48,8 @@ function closeModal(selector, otherForm, noUnfix) {
 }
 
 function sendForm(btnSend) {
-	let error = false;
 	let form = $(btnSend).parents('.js-form');
-	let inputs = form.find('input, textarea');
-
-	error = checkForm(form);
+	let error = checkForm(form);
 
 	if (!error) {
 		ajaxSend(btnSend, function (btnSend) {
@@ -60,7 +57,7 @@ function sendForm(btnSend) {
 			let inputs = form.find('input, textarea');
 
 			inputs.val('');
-			btnSend.removeClass('disabled');
+			// btnSend.removeClass('disabled');
 			closeModal(btnSend, false, true);
 			checkModal(btnSend);
 
@@ -73,24 +70,26 @@ function sendForm(btnSend) {
 
 function checkForm(form, input) {
 	let error = false;
-	let first = true;
-	let inputs = form ? form.find('input, textarea') : $(input);
+	let _form = form ? form : $(input).parents('.js-form');
+	let inputs = input ? $(input) : _form.find('input, textarea');
+	let btn = _form.find('.js-form-send');
 
 	for (let i = 0; i < inputs.length; i++) {
 		let item = $(inputs).eq(i);
 
 		if (
-			(item.hasClass('js-form-text') && checkVal(item.val())) ||
-			(item.hasClass('js-form-mail') && validateEmail(item.val())) ||
-			(item.hasClass('js-form-phone') && !item.inputmask("isComplete"))
+			(item.hasClass('js-form-text') && checkValue(item)) ||
+			(item.hasClass('js-form-mail') && validateEmail(item)) ||
+			(item.hasClass('js-form-phone') && completePhone(item))
 		) {
-			// if (first) item.focus();
-			item.addClass('error');
-			first = false;
 			error = true;
-		} else {
-			item.removeClass('error');
 		}
+	}
+
+	if (_form.find('.error')[0]) {
+		btn.addClass('disabled');
+	} else {
+		btn.removeClass('disabled');
 	}
 
 	return error;
@@ -110,9 +109,9 @@ function ajaxSend(btn, callback) {
 		btnSend.addClass('disabled');
 
 		// ! включить при работе на сервере, вместо setTimeout(...)
-		$.post(action, JSON.stringify(dataRequest), function (dataResponsive) {
-			console.log(JSON.stringify(dataRequest));
-			console.log(JSON.parse(dataResponsive));
+		$.post(action, dataRequest, function (dataResponsive) {
+			console.log(dataRequest);
+			console.log(dataResponsive);
 
 			callback(btnSend);
 		});
@@ -124,16 +123,39 @@ function ajaxSend(btn, callback) {
 	}
 }
 
-function checkVal(value) {
-	value = $.trim(value);
-	if (value === '') return true;
-	return false;
+function checkValue(item) {
+	 let value = $.trim(item.val());
+
+	if (value === '') {
+		item.addClass('error');
+		return true;
+	} else {
+		item.removeClass('error');
+		return false;
+	}
 }
 
-function validateEmail(email) {
+function completePhone(item) {
+	if (!item.inputmask("isComplete")) {
+		item.addClass('error');
+		return true;
+	} else {
+		item.removeClass('error');
+		return false;
+	}
+}
+
+function validateEmail(item) {
+	let email = item.val();
 	let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-	if (reg.test(email) == false) return true;
-	return false;
+
+	if (reg.test(email) == false) {
+		item.addClass('error');
+		return true;
+	} else {
+		item.removeClass('error');
+		return false;
+	}
 }
 
 function fixed() {
@@ -179,6 +201,6 @@ $(document).ready(function () {
 	});
 
 	$(document).on('blur', 'input, textarea', function () {
-		checkForm($(this).parents('.js-form'));
+		checkForm(false, this);
 	});
 });

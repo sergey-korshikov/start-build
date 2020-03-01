@@ -53,7 +53,7 @@ const srcVideos = [
 	'./src/static/videos/**/*.*'
 ];
 
-function views () {
+function views() {
 	return gulp.src('./src/pug/*.pug')
 		.pipe(plumber({
 			errorHandler: notify.onError("Error: Incorrect Pug \n\n <%= error.message %>")
@@ -69,7 +69,7 @@ function views () {
 		.pipe(browserSync.stream());
 }
 
-function styles () {
+function styles() {
 	return gulp.src('./src/scss/styles.scss')
 		.pipe(plumber({
 			errorHandler: notify.onError("Error: Incorrect Style \n\n <%= error.message %>")
@@ -95,7 +95,7 @@ function styles () {
 		.pipe(browserSync.stream());
 }
 
-function stylesProduction () {
+function stylesProduction() {
 	return gulp.src('./src/scss/styles.scss')
 		.pipe(plumber({
 			errorHandler: notify.onError("Error: Incorrect Style \n\n <%= error.message %>")
@@ -119,7 +119,7 @@ function stylesProduction () {
 		.pipe(browserSync.stream());
 }
 
-function styleHelpers () {
+function styleHelpers() {
 	return gulp.src(srcStyleHelpers)
 		.pipe(plumber({
 			errorHandler: notify.onError("Error: Incorrect Lib CSS \n\n <%= error.message %>")
@@ -128,7 +128,7 @@ function styleHelpers () {
 		.pipe(browserSync.stream());
 }
 
-function styleLibs () {
+function styleLibs() {
 	return gulp.src(srcStyleLibs)
 		.pipe(plumber({
 			errorHandler: notify.onError("Error: Incorrect Lib CSS \n\n <%= error.message %>")
@@ -138,7 +138,7 @@ function styleLibs () {
 		.pipe(browserSync.stream());
 }
 
-function fonts () {
+function fonts() {
 	return gulp.src(srcFonts)
 		.pipe(plumber({
 			errorHandler: notify.onError("Error: Incorrect Lib Fonts \n\n <%= error.message %>")
@@ -147,7 +147,7 @@ function fonts () {
 		.pipe(browserSync.stream());
 }
 
-function icons () {
+function icons() {
 	return gulp.src(srcIcons)
 		.pipe(plumber({
 			errorHandler: notify.onError("Error: Incorrect Lib Fonts \n\n <%= error.message %>")
@@ -156,7 +156,7 @@ function icons () {
 		.pipe(browserSync.stream());
 }
 
-function scripts () {
+function scripts() {
 	return gulp.src(srcScripts)
 		.pipe(plumber({
 			errorHandler: notify.onError("Error: Incorrect Script \n\n <%= error.message %>")
@@ -171,7 +171,7 @@ function scripts () {
 		.pipe(browserSync.stream());
 }
 
-function scriptsProduction () {
+function scriptsProduction() {
 	return gulp.src(srcScripts)
 		.pipe(plumber({
 			errorHandler: notify.onError("Error: Incorrect Script \n\n <%= error.message %>")
@@ -187,7 +187,7 @@ function scriptsProduction () {
 		.pipe(browserSync.stream());
 }
 
-function scriptLibs () {
+function scriptLibs() {
 	return gulp.src(srcScriptLibs)
 		.pipe(plumber({
 			errorHandler: notify.onError("Error: Incorrect Lib JS \n\n <%= error.message %>")
@@ -200,7 +200,7 @@ function scriptLibs () {
 		.pipe(browserSync.stream());
 }
 
-function images () {
+function images() {
 	return gulp.src(srcImages)
 		.pipe(plumber({
 			errorHandler: notify.onError("Error: Incorrect Image \n\n <%= error.message %>")
@@ -209,7 +209,7 @@ function images () {
 		.pipe(browserSync.stream());
 }
 
-function videos () {
+function videos() {
 	return gulp.src(srcVideos)
 		.pipe(plumber({
 			errorHandler: notify.onError("Error: Incorrect Image \n\n <%= error.message %>")
@@ -218,11 +218,11 @@ function videos () {
 		.pipe(browserSync.stream());
 }
 
-function cleanFiles () {
+function cleanFiles() {
 	return del('./build/*');
 }
 
-function watch () {
+function watch() {
 	browserSync.init({
 		server: {
 			baseDir: './build/'
@@ -231,14 +231,14 @@ function watch () {
 			{
 				route: "/ajax",
 				handle: function (req, res, next) {
-					let resData;
+					let resData = true;
 					console.log(req.url);
 
 					req.setEncoding('utf8');
 
 					req.on('data', (chunk) => {
-						resData = JSON.parse(chunk);
-						console.log(resData);
+						// resData = JSON.parse(chunk);
+						console.log(chunk);
 					});
 
 					req.on('end', () => {
@@ -294,7 +294,7 @@ gulp.task('watch', watch);
 gulp.task(
 	'dev', gulp.series(
 		'cleanFiles',
-		// 'styleLibs',
+		'styleLibs',
 		gulp.parallel(
 			'views',
 			'styles',
@@ -312,7 +312,7 @@ gulp.task(
 gulp.task(
 	'prod', gulp.series(
 		'cleanFiles',
-		// 'styleLibs',
+		'styleLibs',
 		gulp.parallel(
 			'views',
 			'stylesProduction',
