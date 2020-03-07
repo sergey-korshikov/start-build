@@ -18,8 +18,10 @@
 					textarea.form__input.form__input_modal.form__input_textarea.js-form-text(name="message", placeholder="Вопрос", autocomplete="off")
 
 				.form__wrapBtn
-					button.button.disabled.js-form-send(type="submit", data-modal-name="result-buy")
+					button.button.js-form-send(type="submit", data-modal-name="result-buy")
 						span Отправить
+
+				.form__error Произошла ошибка! Ваш запрос не был отправлен, повторите пожалуйста позднее!
 
 .modalWindow.js-modal(data-modal-name="result-buy")
 	.modalWindow__wrap

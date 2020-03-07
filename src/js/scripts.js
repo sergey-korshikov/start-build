@@ -1,24 +1,75 @@
 'use strict';
-// modal windows and forms functions
+// help functions
+function initPhoneMask() {
+	$('.js-form-phone').inputmask({
+		mask: ['+7 (999) 999-99-99', '8 (999) 999-99-99']
+	});
+}
 
+function fixed() {
+	if ($(window).outerHeight(true) < $(document).outerHeight(true)) {
+		$('html').addClass('fixed');
+		$('body').addClass('fixed');
+	}
+}
+
+function unfixed() {
+	$('html').removeClass('fixed');
+	$('body').removeClass('fixed');
+}
+
+function checkValue(item, noError) {
+	let value = $.trim(item.val());
+
+ if (value === '' && (!noError || item.hasClass('error'))) {
+	 item.addClass('error');
+	 return true;
+ } else {
+	 item.removeClass('error');
+	 return false;
+ }
+}
+
+function completePhone(item, noError) {
+ if (!item.inputmask("isComplete") && (!noError || item.hasClass('error'))) {
+	 item.addClass('error');
+	 return true;
+ } else {
+	 item.removeClass('error');
+	 return false;
+ }
+}
+
+function validateEmail(item, noError) {
+ let email = $.trim(item.val());
+ let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+ if (reg.test(email) == false && (!noError || item.hasClass('error'))) {
+	 item.addClass('error');
+	 return true;
+ } else {
+	 item.removeClass('error');
+	 return false;
+ }
+}
+
+// modal windows and forms functions
 function checkModal(selector) {
 	let modalName = $(selector).attr('data-modal-name');
 	let modal = $('.js-modal[data-modal-name="' + modalName + '"]');
 
 	if (modal[0]) {
-
 		openModal(modal);
-
 	} else {
+		$(selector).addClass('sending');
 		$.ajax({
 			url: $(selector).attr('data-modal-url'),
 			success: function(formHtml) {
-
+				$(selector).removeClass('sending');
 				$('.js-forms').append(formHtml);
 				initPhoneMask();
 				modal = $('.js-modal[data-modal-name="' + modalName + '"]');
 				openModal(modal);
-
 			}
 		});
 	}
@@ -47,28 +98,7 @@ function closeModal(selector, linkForm, noUnfix) {
 	});
 }
 
-function sendForm(btnSend) {
-	let form = $(btnSend).parents('.js-form');
-	let error = checkForm(form);
-
-	if (!error) {
-		ajaxSend(btnSend, function (btnSend) {
-			let form = btnSend.parents('.js-form');
-			let inputs = form.find('input, textarea');
-
-			inputs.val('');
-			// btnSend.removeClass('disabled');
-			closeModal(btnSend, false, true);
-			checkModal(btnSend);
-
-			setTimeout(function () {
-				closeModal(btnSend, true);
-			}, 5000);
-		});
-	}
-}
-
-function checkForm(form, input) {
+function checkForm(form, input, noError) {
 	let error = false;
 	let _form = form ? form : $(input).parents('.js-form');
 	let inputs = input ? $(input) : _form.find('input, textarea');
@@ -78,15 +108,15 @@ function checkForm(form, input) {
 		let item = $(inputs).eq(i);
 
 		if (
-			(item.hasClass('js-form-text') && checkValue(item)) ||
-			(item.hasClass('js-form-mail') && validateEmail(item)) ||
-			(item.hasClass('js-form-phone') && completePhone(item))
+			(item.hasClass('js-form-text') && checkValue(item, noError)) ||
+			(item.hasClass('js-form-mail') && validateEmail(item, noError)) ||
+			(item.hasClass('js-form-phone') && completePhone(item, noError))
 		) {
 			error = true;
 		}
 	}
 
-	if (_form.find('.error')[0]) {
+	if (_form.find('.error')[0] && !noError) {
 		btn.addClass('disabled');
 	} else {
 		btn.removeClass('disabled');
@@ -95,85 +125,62 @@ function checkForm(form, input) {
 	return error;
 }
 
+function sendForm(btnSend) {
+	let form = $(btnSend).parents('.js-form');
+	let error = checkForm(form);
+
+	if (!error) {
+		ajaxSend(btnSend, function (btnSend, errorSend) {
+			let form = btnSend.parents('.js-form');
+			let inputs = form.find('input, textarea');
+
+			if (!errorSend) {
+				inputs.val('');
+				form.removeClass('error');
+				btnSend.removeClass('disabled').removeClass('sending');
+				closeModal(btnSend, false, true);
+				checkModal(btnSend);
+
+				setTimeout(function () {
+					closeModal(btnSend, true);
+				}, 5000);
+			} else {
+				form.addClass('error');
+				btnSend.removeClass('disabled').removeClass('sending');
+			}
+		});
+	}
+}
+
 function ajaxSend(btn, callback) {
 	let btnSend = $(btn);
 	let form = btnSend.parents('.js-form');
 	let action = form.attr('action');
-	let dataRequest = {};
 
-	form.find('input, textarea, select').each(function() {
-		dataRequest[this.name] = $(this).val();
-	})
+	if (!btnSend.hasClass('disabled') && !btnSend.hasClass('sending')) {
+		btnSend.addClass('disabled').addClass('sending');
 
-	if (!btnSend.hasClass('disabled')) {
-		btnSend.addClass('disabled');
+		// включить при работе на сервере, вместо setTimeout(...)!
+		// $.post(action, form.serializeArray(), function (dataResponsive) {
+		// 	// console.log(form.serializeArray());
+		// 	// console.log(dataResponsive);
 
-		// ! включить при работе на сервере, вместо setTimeout(...)
-		$.post(action, dataRequest, function (dataResponsive) {
-			console.log(dataRequest);
-			console.log(dataResponsive);
+		// 	if (dataResponsive) {
+		// 		callback(btnSend);
+		// 	} else {
+		// 		callback(btnSend, true);
+		// 	}
+		// });
 
-			callback(btnSend);
-		});
-
-		// ! DELETE (временная замена ajax запроса-ответа)
-		// setTimeout(function () {
-		// 	callback(btnSend);
-		// }, 1500);
+		// DELETE! (временная замена ajax запроса) *всегда первый запрос с ошибкой, второй корректный
+		setTimeout(function () {
+			if (form.hasClass('error')) {
+				callback(btnSend);
+			} else {
+				callback(btnSend, true);
+			}
+		}, 1500);
 	}
-}
-
-function checkValue(item) {
-	 let value = $.trim(item.val());
-
-	if (value === '') {
-		item.addClass('error');
-		return true;
-	} else {
-		item.removeClass('error');
-		return false;
-	}
-}
-
-function completePhone(item) {
-	if (!item.inputmask("isComplete")) {
-		item.addClass('error');
-		return true;
-	} else {
-		item.removeClass('error');
-		return false;
-	}
-}
-
-function validateEmail(item) {
-	let email = item.val();
-	let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-
-	if (reg.test(email) == false) {
-		item.addClass('error');
-		return true;
-	} else {
-		item.removeClass('error');
-		return false;
-	}
-}
-
-function fixed() {
-	if ($(window).outerHeight(true) < $(document).outerHeight(true)) {
-		$('html').addClass('fixed');
-		$('body').addClass('fixed');
-	}
-}
-
-function unfixed() {
-	$('html').removeClass('fixed');
-	$('body').removeClass('fixed');
-}
-
-function initPhoneMask() {
-	$('.js-form-phone').inputmask({
-		mask: ['+7 (999) 999-99-99', '8 (999) 999-99-99']
-	});
 }
 
 $(document).ready(function () {
@@ -196,8 +203,7 @@ $(document).ready(function () {
 	});
 
 	$(document).on('input', 'input, textarea', function () {
-	// 	$(this).removeClass('error');
-		checkForm(false, this);
+		checkForm(false, this, true);
 	});
 
 	$(document).on('blur', 'input, textarea', function () {

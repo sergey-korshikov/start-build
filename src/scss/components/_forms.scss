@@ -34,6 +34,7 @@
 .modalWindow__window {
 	max-height: 100%;
 	max-width: calc(100% - 60px);
+	width: 900px;
 	position: relative;
 	z-index: 2;
 	overflow: auto;
@@ -107,6 +108,11 @@
 		flex-wrap: wrap;
 		margin: 0 -15px;
 	}
+	&.error {
+		.form__error {
+			display: block;
+		}
+	}
 }
 
 .form__block {
@@ -179,4 +185,12 @@
 	@include max575-block{
 		font-size: 14px;
 	}
+}
+
+.form__error {
+	display: none;
+	width: 100%;
+	text-align: center;
+	margin-top: 30px;
+	color: #e00;
 }

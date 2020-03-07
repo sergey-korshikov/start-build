@@ -5,7 +5,7 @@
 	white-space: nowrap;
 	border-radius: 7px;
 	padding: 15px;
-	overflow: hidden;
+	// overflow: hidden;
 	color: #fff;
 	min-width: 160px;
 	text-align: center;
@@ -24,6 +24,7 @@
 		left: 0;
 		top: 0;
 		opacity: 0;
+		border-radius: 7px;
 		background: linear-gradient(#e00, #ad0000);
 		transition: opacity .2s ease-in-out;
 	}
@@ -48,6 +49,22 @@
 	&.disabled {
 		cursor: default;
 		background-color: rgba(238, 0, 0, 0.5);
+	}
+
+	&.sending {
+		&::after {
+			content: '';
+			position: absolute;
+			background-image: url(icons/ajax.gif);
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: center;
+			left: 100%;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 50px;
+			height: 50px;
+		}
 	}
 
 	& > span,
