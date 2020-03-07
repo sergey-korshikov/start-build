@@ -1,4 +1,5 @@
 'use strict';
+
 // help functions
 function initPhoneMask() {
 	$('.js-form-phone').inputmask({
