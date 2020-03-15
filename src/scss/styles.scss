@@ -5,13 +5,13 @@
 @import 'helpers/variables';
 @import 'helpers/fonts';
 @import 'helpers/typography';
+@import 'helpers/controls';
 
 @import 'base/page';
 @import 'base/header';
 @import 'base/main';
 @import 'base/footer';
 
-@import 'elements/controls';
 @import 'elements/menu';
 
 @import 'components/forms';

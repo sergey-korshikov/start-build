@@ -61,7 +61,7 @@ function checkModal(selector) {
 
 	if (modal[0]) {
 		openModal(modal);
-	} else {
+	} else if (!$(selector).hasClass('sending')) {
 		$(selector).addClass('sending');
 		$.ajax({
 			url: $(selector).attr('data-modal-url'),

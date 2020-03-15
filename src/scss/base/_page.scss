@@ -6,6 +6,10 @@ body.fixed {
 	overflow-y: scroll;
 }
 
+body {
+	font-family: OpenSans, Arial, sans-serif;
+}
+
 .page {
 	display: flex;
 	flex-direction: column;
@@ -15,14 +19,12 @@ body.fixed {
 	// max-width: 1920px;
 	// overflow: hidden;
 	// margin: 0 auto;
-	font-family: OpenSans, Arial, sans-serif;
 }
 
 .container {
 	@include wrapper();
 	width: 100%;
-	max-width: 1860px;
-	@include max1889-block{
+	@include max1919-block{
 		max-width: 1410px;
 	}
 	@include max1439-block{
@@ -32,10 +34,10 @@ body.fixed {
 		max-width: 960px;
 	}
 	@include max991-block{
-		max-width: 740px;
+		max-width: 750px;
 	}
 	@include max767-block{
-		max-width: 540px;
+		max-width: 560px;
 	}
 }
 
