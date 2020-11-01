@@ -1,5 +1,4 @@
 const gulp = require('gulp');
-// const gulpif = require('gulp-if');
 const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
 const sprite = require('gulp-svg-sprite');

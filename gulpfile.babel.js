@@ -10,14 +10,16 @@ import scripts  from './gulp/tasks/scripts';
 import server   from './gulp/tasks/server';
 import settings from './gulp/config';
 
-// const {paths} = settings;
+const {paths} = settings;
 
-// const watch = () => {
-// 	watch(`${paths.blocks}**/*.pug`, views);
-// 	watch(`${paths.blocks}**/*.scss`, scssBlocksConcat);
-// 	watch(`${paths.js.src}**/*.js`, javascript);
-// 	watch(`${paths.img.src}**/*.{jpg,png,svg,gif}`, img);
-// };
+const watch = () => {
+	gulp.watch(paths.icons.src, icons);
+	gulp.watch(paths.images.src, images);
+	gulp.watch(paths.statics.src, statics);
+	gulp.watch(paths.src + 'pug/**/*.*', views);
+	gulp.watch(paths.src + 'scss/**/*.*', styles);
+	gulp.watch(paths.src + 'js/**/*.*', scripts);
+};
 
 gulp.task('clean', clean);
 gulp.task('icons', icons);
@@ -26,6 +28,7 @@ gulp.task('statics', statics);
 gulp.task('views', views);
 gulp.task('styles', styles);
 gulp.task('scripts', scripts);
+gulp.task('watch', watch);
 gulp.task('server', server);
 
 gulp.task('setDev', function(done) {
@@ -71,7 +74,10 @@ gulp.task(
 gulp.task(
 	'default', gulp.series(
 		'dev',
-		'server',
+		gulp.parallel(
+			'watch',
+			'server',
+		)
 	)
 );
 

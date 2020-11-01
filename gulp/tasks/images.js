@@ -2,7 +2,6 @@ const gulp = require('gulp');
 const gulpif = require('gulp-if');
 const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
-// const changed = require('gulp-changed');
 const minification = require('gulp-image');
 // const imagemin = require('gulp-imagemin');
 
@@ -28,8 +27,7 @@ const images = (done) => {
 		.pipe(plumber({
 			errorHandler: notify.onError('Error: Incorrect Lib CSS \n\n <%= error.message %>')
 		}))
-		// .pipe(gulpif(settings.mode === 'development', minification(options), changed(paths.img.built)))
-		.pipe(minification(options))
+		.pipe(gulpif(settings.mode === 'production', minification(options)))
 		.pipe(plumber.stop())
 		.pipe(gulp.dest(paths.images.dist));
 
