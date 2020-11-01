@@ -5,14 +5,23 @@ html(lang='ru')
 	head
 		meta(charset = 'utf-8')
 		meta(name='viewport', content='initial-scale=1.0, width=device-width')
+		meta(http-equiv='X-UA-Compatible', content='IE=Edge')
 		title=pageTitle + ' | Название сайта'
-		link(rel='stylesheet', href='css/styles.css')
-		link(rel='shortcut icon', href='images/favicon.png', type='image/png')
+		link(href='/styles/inputmask.css', rel='stylesheet')
+		link(href='/styles/general.css', rel='stylesheet')
+		link(href='/static/icons/favicon.png', rel='shortcut icon', type='image/png')
+		- if (styles)
+			- for (var x = 0; x < styles.length; x++)
+				link(href=styles[x], rel='stylesheet')
 
-	body#body
-		.page(class=pageClass)
-			block content
-			.js-forms
+	body.page(class=pageClass)
+		block content
+		.js-forms
 
-		script(src='js/libs.js', defer)
-		script(src='js/scripts.js', defer)
+		script(src='/scripts/jquery.min.js', defer)
+		script(src='/scripts/jquery.inputmask.bundle.min.js', defer)
+		script(src='/scripts/general.js', defer)
+		script(src='/scripts/forms.js', defer)
+		- if (scripts)
+			- for (var x = 0; x < scripts.length; x++)
+				script(src=scripts[x], defer)

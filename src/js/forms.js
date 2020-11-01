@@ -1,6 +1,4 @@
-'use strict';
-
-// help functions
+/* help functions */
 function initPhoneMask() {
 	$('.js-form-phone').inputmask({
 		mask: ['+7 (999) 999-99-99', '8 (999) 999-99-99']
@@ -54,7 +52,7 @@ function validateEmail(item, noError) {
  }
 }
 
-// modal windows and forms functions
+/* modal windows and forms functions */
 function checkModal(selector) {
 	let modalName = $(selector).attr('data-modal-name');
 	let modal = $('.js-modal[data-modal-name="' + modalName + '"]');
@@ -64,7 +62,7 @@ function checkModal(selector) {
 	} else if (!$(selector).hasClass('sending')) {
 		$(selector).addClass('sending');
 		$.ajax({
-			url: $(selector).attr('data-modal-url'),
+			url: $(selector).attr('href'),
 			success: function(formHtml) {
 				$(selector).removeClass('sending');
 				$('.js-forms').append(formHtml);
@@ -161,7 +159,7 @@ function ajaxSend(btn, callback) {
 	if (!btnSend.hasClass('disabled') && !btnSend.hasClass('sending')) {
 		btnSend.addClass('disabled').addClass('sending');
 
-		// включить при работе на сервере, вместо setTimeout(...)!
+		/* включить при работе на сервере, вместо setTimeout(...) */
 		// $.post(action, form.serializeArray(), function (dataResponsive) {
 		// 	// console.log(form.serializeArray());
 		// 	// console.log(dataResponsive);
@@ -173,7 +171,7 @@ function ajaxSend(btn, callback) {
 		// 	}
 		// });
 
-		// DELETE! (временная замена ajax запроса) *всегда первый запрос с ошибкой, второй корректный
+		/* DELETE! (временная замена ajax запроса) *всегда первый запрос с ошибкой, второй корректный */
 		setTimeout(function () {
 			if (form.hasClass('error')) {
 				callback(btnSend);
@@ -184,8 +182,8 @@ function ajaxSend(btn, callback) {
 	}
 }
 
-$(document).ready(function () {
-	// init and events for modal windows and forms
+$(function () {
+	/* init and events for modal windows and forms */
 	initPhoneMask();
 
 	$(document).on('click', '.js-modal-open', function (e) {

@@ -1,8 +1,8 @@
 models
-package-lock.json
+public
 node_modules
-src/static
-build
-dev
+src/static/images
+src/static/videos
+package-lock.json
 *.zip
 *.rar
