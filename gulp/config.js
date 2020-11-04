@@ -31,18 +31,17 @@ export default {
 				PATHS.src + 'static/fonts/**/*.*',
 				PATHS.src + 'static/icons/**/*.*',
 				PATHS.src + 'static/svg/symbol/svg/sprite.symbol.svg',
+
 				'./node_modules/normalize.css/normalize.css',
-				// './node_modules/inputmask/css/inputmask.css',
 				'./node_modules/jquery/dist/jquery.min.js',
 				'./node_modules/imask/dist/imask.min.js',
-				// './node_modules/inputmask/dist/min/jquery.inputmask.bundle.min.js',
 			],
 			dist: [
 				PATHS.public + 'static/fonts/',
 				PATHS.public + 'static/icons/',
 				PATHS.public + 'static/icons/',
+
 				PATHS.public + 'styles/vendors/',
-				// PATHS.public + 'styles/vendors/',
 				PATHS.public + 'scripts/vendors/',
 				PATHS.public + 'scripts/vendors/',
 			]

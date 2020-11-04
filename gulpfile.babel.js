@@ -61,6 +61,10 @@ gulp.task('prod',
 	)
 );
 
+gulp.task('post',
+	postProcessing
+);
+
 gulp.task('default',
 	gulp.series(
 		'dev',
@@ -69,10 +73,6 @@ gulp.task('default',
 			server,
 		)
 	)
-);
-
-gulp.task('post',
-	postProcessing
 );
 
 /*

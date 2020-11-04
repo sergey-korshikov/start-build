@@ -22,10 +22,17 @@ const scripts = (done) => {
 				errorHandler: notify.onError('Error: Incorrect Script \n\n <%= error.message %>')
 			}))
 			.pipe(gulpif(settings.mode !== 'production', sourcemaps.init()))
-			.pipe(babel({
-				presets: ['@babel/preset-env'],
-				// plugins: ["@babel/plugin-syntax-dynamic-import"],
-			}))
+			.pipe(babel(
+				// {
+				// 	presets: [
+				// 		"@babel/preset-env"
+				// 	],
+				// 	plugins: [
+				// 		"@babel/plugin-transform-modules-commonjs",
+				// 		// "@babel/plugin-syntax-dynamic-import"
+				// 	]
+				// }
+			))
 			// .pipe(concat('scripts.js'))
 			// .pipe(uglify({
 			// 	toplevel: true
