@@ -1,19 +1,19 @@
-const gulp = require('gulp');
-const gulpif = require('gulp-if');
-const rename = require('gulp-rename');
-const notify = require('gulp-notify');
-const plumber = require('gulp-plumber');
-const pug = require('gulp-pug');
+const gulp     = require('gulp');
+const gulpif   = require('gulp-if');
+const rename   = require('gulp-rename');
+const notify   = require('gulp-notify');
+const plumber  = require('gulp-plumber');
+const pug      = require('gulp-pug');
 const prettify = require('gulp-html-prettify');
 
 import settings from '../config';
 
 const {paths} = settings;
 
-const views = (done) => {
-	for (let i = 0; i < paths.views.length; i++) {
-		const files = paths.views[i].files;
-		const appoint = paths.views[i].appoint;
+const templates = (done) => {
+	for (let i = 0; i < paths.templates.length; i++) {
+		const files = paths.templates[i].files;
+		const appoint = paths.templates[i].appoint;
 
 		gulp.src(files)
 			.pipe(plumber({
@@ -41,4 +41,4 @@ const views = (done) => {
 	done();
 }
 
-export default views;
+export default templates;

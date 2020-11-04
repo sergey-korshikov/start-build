@@ -7,13 +7,15 @@ block variables
 	- var scripts = ['script.js']
 
 block content
-	include ../base/header
+	include ../components/header
 
 	main.main
+		//- include ../elements/menu
+
 		.container
 			div(style="background:#353844;min-height:400px;height:100%;text-align:center")
 				div(style="padding:30px 0 0")
 					a.button.button_write.js-modal-open(href="/ajax/form-write.html", data-modal-name="write")
 						span Написать нам
 
-	include ../base/footer
+	include ../components/footer

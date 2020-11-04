@@ -1,7 +1,7 @@
-const gulp = require('gulp');
-const notify = require('gulp-notify');
+const gulp    = require('gulp');
+const notify  = require('gulp-notify');
 const plumber = require('gulp-plumber');
-const sprite = require('gulp-svg-sprite');
+const sprite  = require('gulp-svg-sprite');
 
 import settings from '../config';
 

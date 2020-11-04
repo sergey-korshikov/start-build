@@ -1,3 +1,5 @@
+include ../mixins/timestamp
+
 block variables
 
 doctype html
@@ -7,21 +9,22 @@ html(lang='ru')
 		meta(name='viewport', content='initial-scale=1.0, width=device-width')
 		meta(http-equiv='X-UA-Compatible', content='IE=Edge')
 		title=pageTitle + ' | Название сайта'
-		link(href='/styles/inputmask.css', rel='stylesheet')
-		link(href='/styles/general.css', rel='stylesheet')
-		link(href='/static/icons/favicon.png', rel='shortcut icon', type='image/png')
+		link(href='/static/icons/favicon.png' + timestamp, rel='shortcut icon', type='image/png')
+		link(href='/styles/vendors/normalize.css' + timestamp, rel='stylesheet')
+		link(href='/styles/general.css' + timestamp, rel='stylesheet')
 		- if (styles)
 			- for (var x = 0; x < styles.length; x++)
-				link(href=styles[x], rel='stylesheet')
+				link(href=styles[x] + timestamp, rel='stylesheet')
 
 	body.page(class=pageClass)
 		block content
 		.js-forms
 
-		script(src='/scripts/jquery.min.js', defer)
-		script(src='/scripts/jquery.inputmask.bundle.min.js', defer)
-		script(src='/scripts/general.js', defer)
-		script(src='/scripts/forms.js', defer)
+		script(src='/scripts/vendors/jquery.min.js' + timestamp, defer)
+		//- script(src='/scripts/vendors/jquery.inputmask.bundle.min.js' + timestamp, defer)
+		script(src='/scripts/vendors/imask.min.js' + timestamp, defer)
+		script(src='/scripts/general.js' + timestamp, defer)
+		script(src='/scripts/forms.js' + timestamp, defer)
 		- if (scripts)
 			- for (var x = 0; x < scripts.length; x++)
-				script(src=scripts[x], defer)
+				script(src=scripts[x] + timestamp, defer)

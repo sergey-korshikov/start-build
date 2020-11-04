@@ -19,7 +19,7 @@ export default {
 
 		images: {
 			src: [
-				PATHS.src + 'static/images/**/*.{jpg,png,svg,gif}',
+				PATHS.src + 'static/images/**/*.{jpg,jpeg,png,svg,gif}',
 			],
 			dist: [
 				PATHS.public + 'static/images/',
@@ -31,27 +31,24 @@ export default {
 				PATHS.src + 'static/fonts/**/*.*',
 				PATHS.src + 'static/icons/**/*.*',
 				PATHS.src + 'static/svg/symbol/svg/sprite.symbol.svg',
-				// './node_modules/slick-carousel/slick/ajax-loader.gif',
-				'./node_modules/inputmask/css/inputmask.css',
+				'./node_modules/normalize.css/normalize.css',
+				// './node_modules/inputmask/css/inputmask.css',
 				'./node_modules/jquery/dist/jquery.min.js',
-				'./node_modules/inputmask/dist/min/jquery.inputmask.bundle.min.js',
-				// './node_modules/slick-carousel/slick/slick.min.js',
-				// PATHS.src + 'js/libraries/jquery.table-scrolling.js',
+				'./node_modules/imask/dist/imask.min.js',
+				// './node_modules/inputmask/dist/min/jquery.inputmask.bundle.min.js',
 			],
 			dist: [
 				PATHS.public + 'static/fonts/',
 				PATHS.public + 'static/icons/',
 				PATHS.public + 'static/icons/',
-				// PATHS.public + 'styles',
-				PATHS.public + 'styles',
-				PATHS.public + 'scripts',
-				PATHS.public + 'scripts',
-				// PATHS.public + 'scripts',
-				// PATHS.public + 'scripts',
+				PATHS.public + 'styles/vendors/',
+				// PATHS.public + 'styles/vendors/',
+				PATHS.public + 'scripts/vendors/',
+				PATHS.public + 'scripts/vendors/',
 			]
 		},
 
-		views: [
+		templates: [
 			{
 				files: PATHS.src + 'pug/pages/*.pug',
 				appoint: 'pages'
@@ -85,7 +82,8 @@ export default {
 		],
 	},
 
-	mode: '',
+	mode: 'production',
 
+	// browsers: ['> 0.1%'],
 	browsers: ['ie >= 10', 'ff >= 29', 'Opera >= 12', 'iOS >= 6', 'Chrome >= 28', 'Android >= 2'],
 }

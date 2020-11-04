@@ -7,15 +7,23 @@ block variables
 	//- - var scripts = ['script.js']
 
 block content
-	include ../base/header
+	include ../mixins/svg
 
-	main.main
+	main.main(style="background:#353844")
 		.container
-			div(style="background:#353844;min-height:400px;height:100%;text-align:center")
-				div(style="padding:30px 0 0")
-					a(href="/main/" style="color:#fff;") Главная
-				div(style="padding:30px 0 0")
-					a(href="/catalog/" style="color:#fff;") Каталог
+			div(style="color:#fff;min-height:100vh;padding:30px")
+				h1 Ссылки:
+				ul(style="margin-bottom:50px")
+					li(style="margin-bottom:15px")
+						a(href="/main/" style="color:#fff") Главная
+					li(style="margin-bottom:15px")
+						a(href="/catalog/" style="color:#fff") Каталог
 
-
-	include ../base/footer
+				h1 Иконки:
+				.row
+					+svg('arrow', '50px', '50px', 'margin:15px')
+					+svg('cross', '50px', '50px', 'margin:15px')
+					+svg('geo', '50px', '50px', 'margin:15px')
+					+svg('magnifier', '50px', '50px', 'margin:15px')
+					+svg('mail', '50px', '50px', 'margin:15px')
+					+svg('phone', '50px', '50px', 'margin:15px')

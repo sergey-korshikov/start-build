@@ -3,7 +3,7 @@
   "version": "1.5.0",
   "main": "gulpfile.babel.js",
   "dependencies": {
-    "inputmask": "^4.0.8",
+    "imask": "^6.0.5",
     "jquery": "^3.3.1",
     "normalize.css": "^8.0.1",
     "smart-grid": "^2.1.2"

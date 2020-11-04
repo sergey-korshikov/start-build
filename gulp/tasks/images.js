@@ -1,15 +1,14 @@
-const gulp = require('gulp');
-const gulpif = require('gulp-if');
-const notify = require('gulp-notify');
-const plumber = require('gulp-plumber');
-const minification = require('gulp-image');
-// const imagemin = require('gulp-imagemin');
+const gulp         = require('gulp');
+const gulpif       = require('gulp-if');
+const notify       = require('gulp-notify');
+const plumber      = require('gulp-plumber');
+const optimization = require('gulp-image');
 
 import settings from '../config';
 
 const {paths} = settings;
 
-const options = {
+const optionsOptmz = {
 	optimizationLevel: 5,
 	pngquant: true,
 	optipng: true,
@@ -27,7 +26,7 @@ const images = (done) => {
 		.pipe(plumber({
 			errorHandler: notify.onError('Error: Incorrect Lib CSS \n\n <%= error.message %>')
 		}))
-		.pipe(gulpif(settings.mode === 'production', minification(options)))
+		.pipe(gulpif(settings.mode === 'production', optimization(optionsOptmz)))
 		.pipe(plumber.stop())
 		.pipe(gulp.dest(paths.images.dist));
 

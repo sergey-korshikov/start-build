@@ -1,8 +1,36 @@
 /* help functions */
 function initPhoneMask() {
-	$('.js-form-phone').inputmask({
-		mask: ['+7 (999) 999-99-99', '8 (999) 999-99-99']
-	});
+	let inputs = document.querySelectorAll('.js-form-phone');
+
+	const options = {
+		mask: [
+			{
+				mask: '(000) 000-00-00',
+				// startsWith: '7',
+				lazy: false
+			},
+			{
+				mask: '0 (000) 000-00-00',
+			},
+			{
+				mask: '00 (000) 000-00-00',
+			},
+			{
+				mask: '000 (000) 000-00-00',
+			}
+		],
+		// placeholderChar: '#',
+	}
+
+	for (let i = 0; i < inputs.length; i++) {
+		const input = inputs[i];
+
+		const mask = new IMask(input, options);
+
+		mask.on("complete", function() {
+			console.log(mask.unmaskedValue);
+		});
+	}
 }
 
 function fixed() {
@@ -30,7 +58,7 @@ function checkValue(item, noError) {
 }
 
 function completePhone(item, noError) {
- if (!item.inputmask("isComplete") && (!noError || item.hasClass('error'))) {
+ if (!noError || item.hasClass('error')) {
 	 item.addClass('error');
 	 return true;
  } else {

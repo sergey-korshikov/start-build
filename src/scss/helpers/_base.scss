@@ -1,14 +1,14 @@
+* {
+	font-family: OpenSans, Arial, sans-serif;
+	box-sizing: border-box;
+}
+
 html.fixed {
 	overflow-y: hidden;
 }
 
 body.fixed {
 	overflow-y: scroll;
-}
-
-* {
-	font-family: OpenSans, Arial, sans-serif;
-	box-sizing: border-box;
 }
 
 .page {

@@ -1,17 +1,16 @@
-@import './../../node_modules/normalize.css/normalize.css';
+// @import './../../node_modules/normalize.css/normalize.css';
 // @import 'vendors/normalize.scss';
 @import 'vendors/smart-grid.scss';
 
 @import 'helpers/variables';
 @import 'helpers/fonts';
-@import 'helpers/typography';
+@import 'helpers/base';
 @import 'helpers/controls';
+@import 'helpers/typography';
 
-@import 'base/page';
-@import 'base/header';
-@import 'base/main';
-@import 'base/footer';
+@import 'components/header';
+@import 'components/main';
+@import 'components/footer';
+@import 'components/forms';
 
 @import 'elements/menu';
-
-@import 'components/forms';

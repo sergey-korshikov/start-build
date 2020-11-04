@@ -1,9 +1,9 @@
-const gulp = require('gulp');
-const gulpif = require('gulp-if');
-const notify = require('gulp-notify');
-const plumber = require('gulp-plumber');
+const gulp     = require('gulp');
+const gulpif   = require('gulp-if');
+const notify   = require('gulp-notify');
+const plumber  = require('gulp-plumber');
 const cleanCss = require('gulp-clean-css');
-const uglify = require('gulp-uglify');
+const uglify   = require('gulp-uglify');
 
 import settings from '../config';
 
