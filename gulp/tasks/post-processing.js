@@ -1,23 +1,47 @@
 const gulp     = require('gulp');
-const gulpif   = require('gulp-if');
-const notify   = require('gulp-notify');
-const plumber  = require('gulp-plumber');
 const concat   = require('gulp-concat');
+const cleanCss = require('gulp-clean-css');
 const gcmq     = require('gulp-group-css-media-queries');
+const del      = require('del');
 
 const postProcessing = (done) => {
+	// clear
+	del.sync('./public-concat/');
+
+	// html
 	gulp.src('./public/**/*.html')
 		.pipe(gulp.dest('./public-concat/'));
 
-	gulp.src('./public/**/*.js')
+	// js
+	gulp.src('./public/scripts/vendors/*.js')
+		.pipe(concat('vendors.js'))
+		.pipe(gulp.dest('./public-concat/scripts/'))
+
+	gulp.src('./public/scripts/*.js')
+		.pipe(gulp.src(['./public/**/*.js', '!./public/scripts/**/*.js']))
 		.pipe(concat('general.js'))
 		.pipe(gulp.dest('./public-concat/scripts/'));
 
-	gulp.src('./public/**/*.css')
+	// css
+	gulp.src('./public/styles/vendors/*.css')
+		.pipe(concat('vendors.css'))
+		.pipe(gulp.dest('./public-concat/styles/'))
+
+	gulp.src('./public/styles/*.css')
+		.pipe(gulp.src(['./public/**/*.css', '!./public/styles/**/*.css']))
 		.pipe(concat('general.css'))
 		.pipe(gcmq())
-		.pipe(gulp.dest('./public-concat/styles/general.css'));
+		.pipe(cleanCss({
+			format: 'keep-breaks',
+			level: {
+				2: {
+					removeDuplicateRules: true
+				}
+			}
+		}))
+		.pipe(gulp.dest('./public-concat/styles/'));
 
+	// static
 	gulp.src('./public/static/**/*.*')
 		.pipe(gulp.dest('./public-concat/static/'));
 

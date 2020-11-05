@@ -33,6 +33,8 @@ const setProd = (done) => {
 	done();
 };
 
+gulp.task('post', postProcessing);
+
 gulp.task('build',
 	gulp.series(
 		clean,
@@ -59,10 +61,6 @@ gulp.task('prod',
 		setProd,
 		'build'
 	)
-);
-
-gulp.task('post',
-	postProcessing
 );
 
 gulp.task('default',

@@ -83,6 +83,6 @@ export default {
 
 	mode: 'production',
 
-	// browsers: ['> 0.1%'],
-	browsers: ['ie >= 10', 'ff >= 29', 'Opera >= 12', 'iOS >= 6', 'Chrome >= 28', 'Android >= 2'],
+	browsers: ['> 0.1%'],
+	// browsers: ['ie >= 10', 'ff >= 29', 'Opera >= 12', 'iOS >= 6', 'Chrome >= 28', 'Android >= 2'],
 }
