@@ -41,9 +41,9 @@ const postProcessing = (done) => {
 		}))
 		.pipe(gulp.dest('./public-concat/styles/'));
 
-	// static
-	gulp.src('./public/static/**/*.*')
-		.pipe(gulp.dest('./public-concat/static/'));
+	// statical
+	gulp.src('./public/statical/**/*.*')
+		.pipe(gulp.dest('./public-concat/statical/'));
 
 	done();
 }

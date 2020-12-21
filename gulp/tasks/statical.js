@@ -9,10 +9,10 @@ import settings from '../config';
 
 const {paths} = settings;
 
-const statics = (done) => {
-	for (let i = 0; i < paths.statics.src.length; i++) {
-		const src = paths.statics.src[i];
-		const dist = paths.statics.dist[i];
+const statical = (done) => {
+	for (let i = 0; i < paths.statical.src.length; i++) {
+		const src = paths.statical.src[i];
+		const dist = paths.statical.dist[i];
 		let conditionCSS = () => src.indexOf('.css') !== -1 && src.indexOf('.min.') === -1;
 		let conditionJS = () => src.indexOf('.js') !== -1 && src.indexOf('.min.') === -1;
 
@@ -28,4 +28,4 @@ const statics = (done) => {
 	done();
 }
 
-export default statics;
+export default statical;

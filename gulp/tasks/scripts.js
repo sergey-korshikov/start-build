@@ -1,12 +1,12 @@
-const gulp       = require('gulp');
-const gulpif     = require('gulp-if');
-const rename     = require('gulp-rename');
-const notify     = require('gulp-notify');
-const plumber    = require('gulp-plumber');
-// const uglify     = require('gulp-uglify');
-// const concat     = require('gulp-concat');
-const babel      = require('gulp-babel');
-const sourcemaps = require('gulp-sourcemaps');
+const gulp          = require('gulp');
+const gulpif        = require('gulp-if');
+const rename        = require('gulp-rename');
+const notify        = require('gulp-notify');
+const plumber       = require('gulp-plumber');
+// const uglify        = require('gulp-uglify');
+// const concat        = require('gulp-concat');
+const babel         = require('gulp-babel');
+const sourcemaps    = require('gulp-sourcemaps');
 
 import settings from '../config';
 
@@ -23,15 +23,11 @@ const scripts = (done) => {
 			}))
 			.pipe(gulpif(settings.mode !== 'production', sourcemaps.init()))
 			.pipe(babel(
-				// {
-				// 	presets: [
-				// 		"@babel/preset-env"
-				// 	],
-				// 	plugins: [
-				// 		"@babel/plugin-transform-modules-commonjs",
-				// 		// "@babel/plugin-syntax-dynamic-import"
-				// 	]
-				// }
+				{
+					presets: [
+						"@babel/preset-env"
+					]
+				}
 			))
 			// .pipe(concat('scripts.js'))
 			// .pipe(uglify({

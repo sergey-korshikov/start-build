@@ -3,7 +3,7 @@ const gulp = require('gulp');
 import clean     from './gulp/tasks/clean';
 import icons     from './gulp/tasks/icons';
 import images    from './gulp/tasks/images';
-import statics   from './gulp/tasks/statics';
+import statical  from './gulp/tasks/statical';
 import templates from './gulp/tasks/templates';
 import styles    from './gulp/tasks/styles';
 import scripts   from './gulp/tasks/scripts';
@@ -12,15 +12,15 @@ import settings  from './gulp/config';
 
 import postProcessing from './gulp/tasks/post-processing';
 
-const {paths} = settings;
+const { paths } = settings;
 
 const watch = () => {
 	gulp.watch(paths.icons.src, icons);
 	gulp.watch(paths.images.src, images);
-	gulp.watch(paths.statics.src, statics);
-	gulp.watch(paths.src + 'pug/**/*.*', templates);
-	gulp.watch(paths.src + 'scss/**/*.*', styles);
-	gulp.watch(paths.src + 'js/**/*.*', scripts);
+	gulp.watch(paths.statical.src, statical);
+	gulp.watch(paths.watch.templates + '/**/*.*', templates);
+	gulp.watch(paths.watch.styles + '/**/*.*', styles);
+	gulp.watch(paths.watch.scripts + '/**/*.*', scripts);
 };
 
 const setDev = (done) => {
@@ -33,14 +33,12 @@ const setProd = (done) => {
 	done();
 };
 
-gulp.task('post', postProcessing);
-
 gulp.task('build',
 	gulp.series(
 		clean,
 		icons,
 		images,
-		statics,
+		statical,
 		gulp.parallel(
 			templates,
 			styles,
@@ -73,9 +71,4 @@ gulp.task('default',
 	)
 );
 
-/*
-	commands:
-		gulp
-		gulp dev
-		gulp prod
-*/
+gulp.task('post', postProcessing);

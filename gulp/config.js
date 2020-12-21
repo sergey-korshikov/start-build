@@ -3,43 +3,52 @@ const PATHS = {
 	public: './public/',
 }
 
+const sources = {
+	templates: PATHS.src + 'templates',
+	styles: PATHS.src + 'styles',
+	scripts: PATHS.src + 'scripts',
+	statical: PATHS.src + 'statical'
+}
+
 export default {
 	paths: {
 		src: PATHS.src,
 		public: PATHS.public,
 
+		watch: sources,
+
 		icons: {
 			src: [
-				PATHS.src + 'static/svg/*.svg',
+				sources.statical + '/svg/*.svg',
 			],
 			dist: [
-				PATHS.src + 'static/svg/',
+				sources.statical + '/svg/',
 			],
 		},
 
 		images: {
 			src: [
-				PATHS.src + 'static/images/**/*.{jpg,jpeg,png,svg,gif}',
+				sources.statical + '/images/**/*.{jpg,jpeg,png,svg,gif}',
 			],
 			dist: [
-				PATHS.public + 'static/images/',
+				PATHS.public + 'statical/images/',
 			],
 		},
 
-		statics: {
+		statical: {
 			src: [
-				PATHS.src + 'static/fonts/**/*.*',
-				PATHS.src + 'static/icons/**/*.*',
-				PATHS.src + 'static/svg/symbol/svg/sprite.symbol.svg',
+				sources.statical + '/fonts/**/*.*',
+				sources.statical + '/icons/**/*.*',
+				sources.statical + '/svg/symbol/svg/sprite.symbol.svg',
 
 				'./node_modules/normalize.css/normalize.css',
 				'./node_modules/jquery/dist/jquery.min.js',
 				'./node_modules/imask/dist/imask.min.js',
 			],
 			dist: [
-				PATHS.public + 'static/fonts/',
-				PATHS.public + 'static/icons/',
-				PATHS.public + 'static/icons/',
+				PATHS.public + 'statical/fonts/',
+				PATHS.public + 'statical/icons/',
+				PATHS.public + 'statical/icons/',
 
 				PATHS.public + 'styles/vendors/',
 				PATHS.public + 'scripts/vendors/',
@@ -49,33 +58,33 @@ export default {
 
 		templates: [
 			{
-				files: PATHS.src + 'pug/pages/*.pug',
+				files: sources.templates + '/pages/*.pug',
 				appoint: 'pages'
 			},
 			{
-				files: PATHS.src + 'pug/ajax/*.pug',
+				files: sources.templates + '/ajax/*.pug',
 				appoint: 'ajax'
 			}
 		],
 
 		styles: [
 			{
-				files: PATHS.src + 'scss/*.*',
+				files: sources.styles + '/*.*',
 				appoint: 'general'
 			},
 			{
-				files: PATHS.src + 'scss/pages/*.*',
+				files: sources.styles + '/pages/*.*',
 				appoint: 'pages'
 			}
 		],
 
 		scripts: [
 			{
-				files: PATHS.src + 'js/*.*',
+				files: sources.scripts + '/*.*',
 				appoint: 'general'
 			},
 			{
-				files: PATHS.src + 'js/pages/*.*',
+				files: sources.scripts + '/pages/*.*',
 				appoint: 'pages'
 			}
 		],
