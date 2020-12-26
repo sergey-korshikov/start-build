@@ -5,9 +5,9 @@ const PATHS = {
 
 const sources = {
 	templates: PATHS.src + 'templates',
-	styles: PATHS.src + 'styles',
+	statical: PATHS.src + 'statical',
 	scripts: PATHS.src + 'scripts',
-	statical: PATHS.src + 'statical'
+	styles: PATHS.src + 'styles',
 }
 
 export default {
@@ -22,7 +22,7 @@ export default {
 				sources.statical + '/svg/*.svg',
 			],
 			dist: [
-				sources.statical + '/svg/',
+				PATHS.public + 'statical/icons/',
 			],
 		},
 
@@ -39,7 +39,6 @@ export default {
 			src: [
 				sources.statical + '/fonts/**/*.*',
 				sources.statical + '/icons/**/*.*',
-				sources.statical + '/svg/symbol/svg/sprite.symbol.svg',
 
 				'./node_modules/normalize.css/normalize.css',
 				'./node_modules/jquery/dist/jquery.min.js',
@@ -47,7 +46,6 @@ export default {
 			],
 			dist: [
 				PATHS.public + 'statical/fonts/',
-				PATHS.public + 'statical/icons/',
 				PATHS.public + 'statical/icons/',
 
 				PATHS.public + 'styles/vendors/',
@@ -70,22 +68,36 @@ export default {
 		styles: [
 			{
 				files: sources.styles + '/*.*',
-				appoint: 'general'
+				appoint: 'general',
+				dest: PATHS.public + 'styles'
 			},
 			{
 				files: sources.styles + '/pages/*.*',
-				appoint: 'pages'
+				appoint: 'pages',
+				dest: PATHS.public
+			},
+			{
+				files: sources.styles + '/vendors/*.*',
+				appoint: 'vendors',
+				dest: PATHS.public + 'styles/vendors'
 			}
 		],
 
 		scripts: [
 			{
 				files: sources.scripts + '/*.*',
-				appoint: 'general'
+				appoint: 'general',
+				dest: PATHS.public + 'scripts'
 			},
 			{
 				files: sources.scripts + '/pages/*.*',
-				appoint: 'pages'
+				appoint: 'pages',
+				dest: PATHS.public
+			},
+			{
+				files: sources.scripts + '/vendors/*.*',
+				appoint: 'vendors',
+				dest: PATHS.public + 'scripts/vendors'
 			}
 		],
 	},

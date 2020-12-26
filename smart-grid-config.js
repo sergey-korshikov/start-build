@@ -57,6 +57,6 @@ var settings = {
 	}
 };
 
-smartgrid('./src/scss/vendors', settings);
+smartgrid('./src/styles/vendors', settings);
 
 // После настройки файла, запустить его с помощью node.js - node smart-grid-config.js
