@@ -3,6 +3,7 @@
   "version": "1.5.0",
   "main": "gulpfile.babel.js",
   "dependencies": {
+    "gulp-include": "^2.4.1",
     "imask": "^6.0.5",
     "jquery": "^3.5.1",
     "normalize.css": "^8.0.1",

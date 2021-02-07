@@ -26,7 +26,7 @@ const images = (done) => {
 		.pipe(plumber({
 			errorHandler: notify.onError('Error: Incorrect Lib CSS \n\n <%= error.message %>')
 		}))
-		.pipe(gulpif(settings.mode === 'production', optimization(optionsOptmz)))
+		.pipe(gulpif((settings.mode === 'production' || settings.mode === 'backend'), optimization(optionsOptmz)))
 		.pipe(plumber.stop())
 		.pipe(gulp.dest(paths.images.dist));
 

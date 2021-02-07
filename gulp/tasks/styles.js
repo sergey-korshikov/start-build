@@ -25,7 +25,7 @@ const styles = (done) => {
 			.pipe(plumber({
 				errorHandler: notify.onError('Error: Incorrect Style \n\n <%= error.message %>')
 			}))
-			// .pipe(gulpif(settings.mode !== 'production', sourcemaps.init()))
+			// .pipe(gulpif(settings.mode === 'development', sourcemaps.init()))
 			.pipe(sassGlob())
 			.pipe(sass())
 			.pipe(gcmq())
@@ -47,7 +47,7 @@ const styles = (done) => {
 				}
 				path.basename = 'style';
 			})))
-			// .pipe(gulpif(settings.mode !== 'production', sourcemaps.write('./')))
+			// .pipe(gulpif(settings.mode === 'development', sourcemaps.write('./')))
 			.pipe(gulp.dest(dest))
 			.pipe(plumber.stop());
 	}

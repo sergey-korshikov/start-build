@@ -4,9 +4,12 @@ const rename        = require('gulp-rename');
 const notify        = require('gulp-notify');
 const plumber       = require('gulp-plumber');
 const uglify        = require('gulp-uglify');
-// const concat        = require('gulp-concat');
 const babel         = require('gulp-babel');
+const include       = require('gulp-include')
+
+// const concat        = require('gulp-concat');
 // const sourcemaps    = require('gulp-sourcemaps');
+
 
 import settings from '../config';
 
@@ -22,7 +25,16 @@ const scripts = (done) => {
 			.pipe(plumber({
 				errorHandler: notify.onError('Error: Incorrect Script \n\n <%= error.message %>')
 			}))
-			// .pipe(gulpif(settings.mode !== 'production', sourcemaps.init()))
+			// .pipe(gulpif(settings.mode === 'development', sourcemaps.init()))
+			.pipe(include({
+				extensions: 'js',
+				hardFail: true,
+				separateInputs: true,
+				includePaths: [
+					paths.src + 'scripts'
+				]
+			}))
+			.on('error', console.log)
 			.pipe(babel(
 				{
 					presets: [
@@ -31,16 +43,18 @@ const scripts = (done) => {
 				}
 			))
 			// .pipe(concat('scripts.js'))
-			.pipe(uglify({
-				toplevel: true
-			}))
+			.pipe(gulpif(settings.mode === 'production', uglify({
+				output: {
+					comments: `/^!/`
+				}
+			})))
 			.pipe(gulpif(appoint === 'pages', rename(function (path) {
 				if (path.basename !== 'index') {
 					path.dirname += '/' + path.basename;
 				}
 				path.basename = 'script';
 			})))
-			// .pipe(gulpif(settings.mode !== 'production', sourcemaps.write('./')))
+			// .pipe(gulpif(settings.mode === 'development', sourcemaps.write('./')))
 			.pipe(gulp.dest(dest))
 			.pipe(plumber.stop());
 	}

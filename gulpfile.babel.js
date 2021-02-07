@@ -33,6 +33,11 @@ const setProd = (done) => {
 	done();
 };
 
+const setBackend = (done) => {
+	settings.mode = 'backend';
+	done();
+};
+
 gulp.task('build',
 	gulp.series(
 		clean,
@@ -57,6 +62,13 @@ gulp.task('dev',
 gulp.task('prod',
 	gulp.series(
 		setProd,
+		'build'
+	)
+);
+
+gulp.task('backend',
+	gulp.series(
+		setBackend,
 		'build'
 	)
 );
