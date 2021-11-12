@@ -1,81 +1,65 @@
 .button {
-	display: inline-block;
-	vertical-align: top;
-	position: relative;
-	white-space: nowrap;
-	border-radius: 7px;
-	padding: 15px;
-	// overflow: hidden;
-	color: #fff;
-	min-width: 160px;
-	text-align: center;
-	background-color: #e00;
-	line-height: 1.4;
-	font-weight: 500;
-	transition: opacity .2s ease-in-out;
 	cursor: pointer;
-
-	&::before {
-		content: '';
-		position: absolute;
-		z-index: 1;
-		bottom: 0;
-		right: 0;
-		left: 0;
-		top: 0;
-		opacity: 0;
-		border-radius: 7px;
-		background: linear-gradient(#e00, #ad0000);
-		transition: opacity .2s ease-in-out;
-	}
-
-	&:active::before {
-		background: linear-gradient(0deg, #e00, #ad0000);
-	}
-
-	&_write {
-		color: #010101;
-		background-color: rgba(194, 207, 219, 0.3);
-
-		&::before {
-			background: linear-gradient(#edf1f4, #bdcbd8);
-		}
-
-		&:active::before {
-			background: linear-gradient(0deg, #edf1f4, #bdcbd8);
-		}
-	}
+	color: #333;
+	font-size: 18px;
+	font-weight: 600;
+	text-align: center;
+	border-radius: 4px;
+	padding: 12px 32px;
+	display: inline-block;
+	background-color: #EDEEF1;
+	transition: background-color .2s ease-in-out, border-color .2s ease-in-out, color .2s ease-in-out;
 
 	&.disabled {
 		cursor: default;
-		background-color: rgba(238, 0, 0, 0.5);
 	}
 
-	&.sending {
-		&::after {
-			content: '';
-			position: absolute;
-			background-image: url(/statical/icons/ajax.gif);
-			background-repeat: no-repeat;
-			background-size: contain;
-			background-position: center;
-			left: 100%;
-			top: 50%;
-			transform: translateY(-50%);
-			width: 50px;
-			height: 50px;
+	@import '../helpers/focus';
+
+	&_accent {
+		color: #fff;
+		background-color: var(--color-accent);
+	}
+
+	&_subscribe {
+		font-size: 14px;
+		font-weight: 400;
+		padding: 5px 20px;
+		color: #fff;
+		background-color: var(--color-accent);
+	}
+
+	&_submit {
+		padding: 11px 22px;
+		color: var(--color-accent);
+		border: 1px solid var(--color-accent);
+		background-color: transparent;
+
+		@include from(768px) {
+			&:hover:not(.disabled) {
+				color: #fff;
+				background-color: var(--color-accent);
+			}
 		}
 	}
 
-	& > span,
-	& > svg {
-		position: relative;
-		z-index: 2;
+	&_history {
+		font-size: 13px;
+		padding: 8px 32px;
 	}
 
-	@include from(768px) {
-		&:not(.disabled):hover::before {
-			opacity: 0.3;
+	&_close {
+		color: #A0A0A0;
+		font-size: 16px;
+		font-weight: 400;
+		padding: 11px 44px;
+		background-color: transparent;
+		border: 1px solid #A0A0A0;
+		@include from(768px) {
+			&:hover:not(.disabled) {
+				color: var(--color-accent);
+				border-color: var(--color-accent);
+			}
 		}
 	}
 }

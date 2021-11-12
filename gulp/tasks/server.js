@@ -7,36 +7,38 @@ const {paths} = settings;
 const server = () => browserSync.init({
 	open: true,
 	server: {
-		baseDir: paths.public,
+		baseDir: paths.build,
 		directory: false
 	},
-	// middleware: [
-	// 	{
-	// 		route: '/ajax',
-	// 		handle: function (req, res, next) {
-	// 			let resData = true;
-	// 			console.log(req.url);
+	middleware: [
+		{
+			route: '/test',
+			handle: function (req, res, next) {
+				let resData = true;
+				console.log(req.url);
 
-	// 			req.setEncoding('utf8');
+				req.setEncoding('utf8');
 
-	// 			req.on('data', (chunk) => {
-	// 				// resData = JSON.parse(chunk);
-	// 				console.log(chunk);
-	// 			});
+				req.on('data', (chunk) => {
+					// resData = JSON.parse(chunk);
+					resData = chunk;
+					console.log(chunk);
+				})
 
-	// 			req.on('end', () => {
-	// 				try {
-	// 					const data = JSON.stringify(resData);
-	// 					res.write(data);
-	// 					res.end();
-	// 				} catch (error) {
-	// 					res.statusCode = 400;
-	// 					return res.end(`error: ${error.message}`);
-	// 				}
-	// 			});
-	// 		}
-	// 	}
-	// ],
+				req.on('end', () => {
+					try {
+						// const data = JSON.stringify(resData);
+						// res.write(data);
+						res.write(resData);
+						res.end();
+					} catch (error) {
+						res.statusCode = 400;
+						return res.end(`error: ${error.message}`);
+					}
+				});
+			}
+		}
+	],
 	ghostMode: {
 		clicks: false,
 		forms: false,
@@ -44,7 +46,7 @@ const server = () => browserSync.init({
 	}, // синхронизация между браузерами
 	// tunnel: true,
 	notify: true,
-	files: paths.public + '**/*.*',
+	files: paths.build + '**/*.*',
 });
 
 export default server;

@@ -3,6 +3,38 @@
 	box-sizing: border-box;
 }
 
+*,
+html,
+button,
+input,
+optgroup,
+select,
+textarea {
+	line-height: 1.5;
+}
+
+input,
+textarea {
+	-webkit-appearance: none;
+}
+
+[data-js-focus-visible] :focus:not(.focus-visible) {
+  outline: none !important;
+}
+
+a {
+	text-decoration: none;
+	&:focus {
+		text-decoration: none;
+	}
+}
+
+button {
+	border: none;
+	background-color: transparent;
+	padding: 0;
+}
+
 html.fixed {
 	overflow-y: hidden;
 }
@@ -48,4 +80,32 @@ body.fixed {
 
 .row {
 	@include row-flex();
+}
+
+hr {
+	margin: 0 0 16px;
+	border: none;
+	color: #bdbdbd;
+	background-color: #bdbdbd;
+	height: 1px;
+}
+
+.disable-scroll {
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+	position: fixed;
+	left: 0;
+	top: 0;
+}
+
+.visually-hidden {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px);
+	clip: rect(1px, 1px, 1px, 1px);
+	padding: 0 !important;
+	border: 0 !important;
+	height: 1px !important;
+	width: 1px !important;
+	overflow: hidden;
 }

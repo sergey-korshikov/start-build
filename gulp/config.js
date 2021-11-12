@@ -1,58 +1,53 @@
 const PATHS = {
 	src: './src/',
-	public: './public/',
+	build: './build/',
 }
 
 const sources = {
 	templates: PATHS.src + 'templates',
-	statical: PATHS.src + 'statical',
 	scripts: PATHS.src + 'scripts',
 	styles: PATHS.src + 'styles',
+	static: PATHS.src + 'static',
 }
 
 export default {
 	paths: {
 		src: PATHS.src,
-		public: PATHS.public,
+		build: PATHS.build,
 
 		watch: sources,
 
 		icons: {
 			src: [
-				sources.statical + '/svg/*.svg',
+				sources.static + '/svg/*.svg',
 			],
 			dist: [
-				PATHS.public + 'statical/icons/',
+				PATHS.build + 'icons/',
 			],
 		},
 
 		images: {
 			src: [
-				sources.statical + '/images/**/*.{jpg,jpeg,png,svg,gif}',
+				sources.static + '/images/**/*.{jpg,jpeg,png,svg,gif}',
 			],
 			dist: [
-				PATHS.public + 'statical/images/',
+				PATHS.build + 'images/',
 			],
 		},
 
-		statical: {
-			src: [
-				sources.statical + '/fonts/**/*.*',
-				sources.statical + '/icons/**/*.*',
+		static: [
+			[sources.static + '/fonts/**/*.*', PATHS.build + 'fonts/'],
+			[sources.static + '/icons/**/*.*', PATHS.build + 'icons/'],
 
-				'./node_modules/normalize.css/normalize.css',
-				'./node_modules/jquery/dist/jquery.min.js',
-				'./node_modules/imask/dist/imask.min.js',
-			],
-			dist: [
-				PATHS.public + 'statical/fonts/',
-				PATHS.public + 'statical/icons/',
+			['./node_modules/normalize.css/normalize.css', PATHS.build + 'styles/vendors/'],
+			['./node_modules/swiper/swiper-bundle.min.css', PATHS.build + 'styles/vendors/'],
 
-				PATHS.public + 'styles/vendors/',
-				PATHS.public + 'scripts/vendors/',
-				PATHS.public + 'scripts/vendors/',
-			]
-		},
+			['./node_modules/swiper/swiper-bundle.min.js', PATHS.build + 'scripts/vendors/'],
+			['./node_modules/focus-visible/dist/focus-visible.min.js', PATHS.build + 'scripts/vendors/'],
+			['./node_modules/imask/dist/imask.min.js', PATHS.build + 'scripts/vendors/'],
+
+			[sources.static + '/data/ajax/**/*.*', PATHS.build + 'ajax/'],
+		],
 
 		templates: [
 			{
@@ -69,17 +64,17 @@ export default {
 			{
 				files: sources.styles + '/*.*',
 				appoint: 'general',
-				dest: PATHS.public + 'styles'
+				dest: PATHS.build + 'styles'
 			},
 			{
 				files: sources.styles + '/pages/*.*',
 				appoint: 'pages',
-				dest: PATHS.public
+				dest: PATHS.build
 			},
 			{
 				files: sources.styles + '/vendors/*.*',
 				appoint: 'vendors',
-				dest: PATHS.public + 'styles/vendors'
+				dest: PATHS.build + 'styles/vendors'
 			}
 		],
 
@@ -87,17 +82,17 @@ export default {
 			{
 				files: sources.scripts + '/*.*',
 				appoint: 'general',
-				dest: PATHS.public + 'scripts'
+				dest: PATHS.build + 'scripts'
 			},
 			{
 				files: sources.scripts + '/pages/*.*',
 				appoint: 'pages',
-				dest: PATHS.public
+				dest: PATHS.build
 			},
 			{
 				files: sources.scripts + '/vendors/*.*',
 				appoint: 'vendors',
-				dest: PATHS.public + 'scripts/vendors'
+				dest: PATHS.build + 'scripts/vendors'
 			}
 		],
 	},

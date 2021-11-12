@@ -36,7 +36,7 @@ const templates = (done) => {
 				path.dirname += '/ajax';
 			})))
 			.pipe(plumber.stop())
-			.pipe(gulp.dest(paths.public));
+			.pipe(gulp.dest(paths.build));
 	}
 	done();
 }

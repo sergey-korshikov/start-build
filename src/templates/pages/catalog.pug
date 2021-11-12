@@ -4,18 +4,11 @@ block variables
 	- var pageTitle = 'Страница каталога'
 	- var pageClass = '' // дополнительный класс для body
 	- var styles = ['style.css']
-	- var scripts = ['script.js']
+	- var scripts = ['script.min.js']
 
 block content
 	include ../components/header
 
 	main.main
-		//- include ../elements/menu
-
-		.container
-			div(style="background:#353844;min-height:400px;height:100%;text-align:center")
-				div(style="padding:30px 0 0")
-					a.button.button_write.js-modal-open(href="/ajax/form-write.html", data-modal-name="write")
-						span Написать нам
 
 	include ../components/footer

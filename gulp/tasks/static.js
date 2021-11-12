@@ -1,4 +1,5 @@
 const gulp     = require('gulp');
+const rename   = require('gulp-rename');
 const gulpif   = require('gulp-if');
 const notify   = require('gulp-notify');
 const plumber  = require('gulp-plumber');
@@ -9,10 +10,10 @@ import settings from '../config';
 
 const {paths} = settings;
 
-const statical = (done) => {
-	for (let i = 0; i < paths.statical.src.length; i++) {
-		const src = paths.statical.src[i];
-		const dist = paths.statical.dist[i];
+const staticFiles = (done) => {
+	for (let i = 0; i < paths.static.length; i++) {
+		const src = paths.static[i][0];
+		const dist = paths.static[i][1];
 		let conditionCSS = () => src.indexOf('.css') !== -1 && src.indexOf('.min.') === -1;
 		let conditionJS = () => src.indexOf('.js') !== -1 && src.indexOf('.min.') === -1;
 
@@ -21,11 +22,20 @@ const statical = (done) => {
 				errorHandler: notify.onError('Error: Incorrect Lib CSS \n\n <%= error.message %>')
 			}))
 			.pipe(gulpif(conditionCSS, cleanCss()))
-			.pipe(gulpif(conditionJS, uglify({toplevel: true})))
+			.pipe(gulpif(conditionJS, uglify({
+				// compress: {
+				// 	unused: false
+				// },
+				// toplevel: true,
+				output: {
+					comments: `/^!/`
+				}
+			})))
+			.pipe(gulpif(conditionJS, rename({suffix: '.min'})))
 			.pipe(plumber.stop())
 			.pipe(gulp.dest(dist));
 	}
 	done();
 }
 
-export default statical;
+export default staticFiles;

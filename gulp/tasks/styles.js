@@ -3,13 +3,14 @@ const gulpif       = require('gulp-if');
 const rename       = require('gulp-rename');
 const notify       = require('gulp-notify');
 const plumber      = require('gulp-plumber');
-const sass         = require('gulp-sass');
-sass.compiler      = require('node-sass');
+const gulpSass     = require('gulp-sass');
+const nodeSass     = require('node-sass');
 const sassGlob     = require('gulp-sass-glob');
 const cleanCss     = require('gulp-clean-css');
-// const sourcemaps   = require('gulp-sourcemaps');
+const sourcemaps   = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
 const gcmq         = require('gulp-group-css-media-queries');
+const sass         = gulpSass(nodeSass);
 
 import settings from '../config';
 
@@ -25,7 +26,7 @@ const styles = (done) => {
 			.pipe(plumber({
 				errorHandler: notify.onError('Error: Incorrect Style \n\n <%= error.message %>')
 			}))
-			// .pipe(gulpif(settings.mode === 'development', sourcemaps.init()))
+			.pipe(gulpif(settings.mode === 'development', sourcemaps.init()))
 			.pipe(sassGlob())
 			.pipe(sass())
 			.pipe(gcmq())
@@ -47,7 +48,7 @@ const styles = (done) => {
 				}
 				path.basename = 'style';
 			})))
-			// .pipe(gulpif(settings.mode === 'development', sourcemaps.write('./')))
+			.pipe(gulpif(settings.mode === 'development', sourcemaps.write('./')))
 			.pipe(gulp.dest(dest))
 			.pipe(plumber.stop());
 	}
