@@ -1,4 +1,4 @@
-function initPhoneMask() {
+const initPhoneMask = function() {
 	const id = Date.now();
 	const inputs = document.querySelectorAll('.js-form-phone');
 

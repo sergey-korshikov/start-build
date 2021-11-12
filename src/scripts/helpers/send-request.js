@@ -1,5 +1,5 @@
-function getUrlPairs(obj) {
-	var getType = obj => obj === undefined ? 'undefined' : (obj === null ? 'null' : obj.constructor.name),
+const getUrlPairs = function(obj) {
+	let getType = obj => obj === undefined ? 'undefined' : (obj === null ? 'null' : obj.constructor.name),
 			simple = (path, val) => path + '=' + val,
 			simpleEnc = (path, val) => simple(path, encodeURIComponent(val)),
 			typeFunc = {

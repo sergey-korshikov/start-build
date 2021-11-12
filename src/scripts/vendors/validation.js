@@ -1,3 +1,5 @@
+'use strict';
+
 const checkForm = function(form, settings, isViewErrors, isUpdatePhone) {
 	if (!form) return false;
 
