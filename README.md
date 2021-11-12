@@ -22,20 +22,20 @@ ___
 > Основные настройки путей и подключение дополнительных библиотек в файле "gulp/config.js"
 
 1. Шаблоны в формате **.pug**, распределяются по папкам исходя из названия файла
-	- `"src/templates/pages/index.pug" (только для "index.pug") ==> "public/index.html"`
-	- `"src/templates/pages/[file-name].pug" (все файлы, кроме "index.pug") ==> "public/[file-name]/index.html"`
-	- `"src/templates/ajax/[file-name].pug" ==> "public/ajax/[file-name].html"`
+	- `"src/templates/pages/index.pug" (только для "index.pug") ==> "build/index.html"`
+	- `"src/templates/pages/[file-name].pug" (все файлы, кроме "index.pug") ==> "build/[file-name]/index.html"`
+	- `"src/templates/ajax/[file-name].pug" ==> "build/ajax/[file-name].html"`
 
 2. Стили в формате **.scss** (src/styles)
 
 3. Скрипты в формате **.js** (src/scripts)
 
-4. Шрифты (src/statical/fonts)
+4. Шрифты (src/static/fonts)
 
-5. Иконки (src/statical/icons)
+5. Иконки (src/static/icons)
 
-6. Изображения (src/statical/images)
+6. Изображения (src/static/images)
 
-7. SVG иконки (src/statical/svg)
+7. SVG иконки (src/static/svg)
 
-8. Видеоролики (src/statical/videos)
+8. Видеоролики (src/static/videos)

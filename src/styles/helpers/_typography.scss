@@ -1,0 +1,88 @@
+.typography {
+	font-size: 18px;
+	color: #333;
+	h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+		margin: 0 0 24px;
+		font-weight: 400;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	h1, .h1 {
+		font-size: 52px;
+		@include max991-block {
+			font-size: 42px;
+		}
+		@include max479-block {
+			font-size: 32px;
+		}
+	}
+	h2, .h2 {
+		font-size: 42px;
+		@include max991-block {
+			font-size: 32px;
+		}
+		@include max479-block {
+			font-size: 22px;
+		}
+	}
+	h3, .h3 {
+		font-size: 32px;
+		@include max991-block {
+			font-size: 22px;
+		}
+		@include max479-block {
+			font-size: 16px;
+		}
+	}
+	h4, .h4 {
+		font-size: 22px;
+		@include max991-block {
+			font-size: 16px;
+		}
+		@include max479-block {
+			font-size: 14px;
+		}
+	}
+	h5, .h5 {
+		font-size: 16px;
+		@include max991-block {
+			font-size: 14px;
+		}
+		@include max479-block {
+			font-size: 12px;
+		}
+	}
+	h6, .h6 {
+		font-size: 14px;
+		@include max991-block {
+			font-size: 12px;
+		}
+		@include max479-block {
+			font-size: 10px;
+		}
+	}
+	p {
+		letter-spacing: 0.02em;
+		margin: 0 0 16px;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	a {
+		color: var(--color-add);
+		transition: color .2s ease-in-out;
+		@import '../helpers/focus';
+		@include from(768px) {
+			&:hover {
+				color: var(--color-accent);
+			}
+		}
+	}
+	@include max991-block {
+		font-size: 14px;
+	}
+	@include max479-block {
+		font-size: 12px;
+	}
+}

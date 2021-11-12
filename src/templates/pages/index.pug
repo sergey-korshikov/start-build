@@ -2,28 +2,35 @@ extends ../base/page
 
 block variables
 	- var pageTitle = 'Индексная страница'
-	- var pageClass = '' // дополнительный класс для body
+	//- - var pageClass = '' // дополнительный класс для body
 	//- - var styles = ['style.css']
 	//- - var scripts = ['script.js']
 
 block content
-	include ../mixins/svg
+	|<style>
+	|	.start-page{background:#353844;color:#fff;min-height:100vh;line-height:1.5;padding:50px 0}
+	|	.start-page b{display:block;font-size:20px;margin-bottom:10px}
+	|	.start-page .row{max-width:800px}
+	|	.start-page ul{margin-bottom:50px;padding-left:20px}
+	|	.start-page li{margin-bottom:5px}
+	|	.start-page a{color:#fff}
+	|	.start-page svg{margin:15px}
+	|</style>
 
-	main.main(style="background:#353844")
+	main.start-page
 		.container
-			div(style="color:#fff;min-height:100vh;padding:30px")
-				h1 Ссылки:
-				ul(style="margin-bottom:50px")
-					li(style="margin-bottom:15px")
-						a(href="/main/" style="color:#fff") Главная
-					li(style="margin-bottom:15px")
-						a(href="/catalog/" style="color:#fff") Каталог
+			b Ссылки:
+			ul
+				li
+					a(href="/main/") Главная
+				li
+					a(href="/catalog/") Каталог
 
-				h1 Иконки:
-				.row
-					+svg('arrow', '50px', '50px', 'margin:15px')
-					+svg('cross', '50px', '50px', 'margin:15px')
-					+svg('geo', '50px', '50px', 'margin:15px')
-					+svg('magnifier', '50px', '50px', 'margin:15px')
-					+svg('mail', '50px', '50px', 'margin:15px')
-					+svg('phone', '50px', '50px', 'margin:15px')
+			b Иконки:
+			.row
+				+svg('arrow', '50', '50')
+				+svg('cross', '50', '50')
+				+svg('geo', '50', '50')
+				+svg('magnifier', '50', '50')
+				+svg('mail', '50', '50')
+				+svg('phone', '50', '50')

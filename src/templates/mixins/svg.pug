@@ -1,5 +1,5 @@
 include ../mixins/timestamp
 
-mixin svg(name, width, height, styles)
-	svg(width=width || '20px', height=height || '20px', style=styles || '')
-		use(xlink:href="/statical/icons/sprite.svg" + timestamp + '#' + name)
+mixin svg(name, width, height, classes, styles)
+	svg(width=width || '20', height=height || '20', class=classes || '', style=styles || '')
+		use(xlink:href="/icons/sprite.svg" + timestamp + '#' + name)

@@ -1,23 +1,23 @@
 const gulp = require('gulp');
 
-import clean     from './gulp/tasks/clean';
-import icons     from './gulp/tasks/icons';
-import images    from './gulp/tasks/images';
-import statical  from './gulp/tasks/statical';
-import templates from './gulp/tasks/templates';
-import styles    from './gulp/tasks/styles';
-import scripts   from './gulp/tasks/scripts';
-import server    from './gulp/tasks/server';
-import settings  from './gulp/config';
+import clean            from './gulp/tasks/clean';
+import icons            from './gulp/tasks/icons';
+import images           from './gulp/tasks/images';
+import staticFiles      from './gulp/tasks/static';
+import templates        from './gulp/tasks/templates';
+import styles           from './gulp/tasks/styles';
+import scripts          from './gulp/tasks/scripts';
+import server           from './gulp/tasks/server';
+import settings         from './gulp/config';
 
-import postProcessing from './gulp/tasks/post-processing';
+import postProcessing   from './gulp/tasks/post-processing';
 
 const { paths } = settings;
 
 const watch = () => {
 	gulp.watch(paths.icons.src, icons);
 	gulp.watch(paths.images.src, images);
-	gulp.watch(paths.statical.src, statical);
+	gulp.watch(paths.static.map(item => item[0]), staticFiles);
 	gulp.watch(paths.watch.templates + '/**/*.*', templates);
 	gulp.watch(paths.watch.styles + '/**/*.*', styles);
 	gulp.watch(paths.watch.scripts + '/**/*.*', scripts);
@@ -43,7 +43,7 @@ gulp.task('build',
 		clean,
 		icons,
 		images,
-		statical,
+		staticFiles,
 		gulp.parallel(
 			templates,
 			styles,

@@ -1,6 +1,6 @@
 models
-public
-public-concat
+build
+build-concat
 node_modules
 src/static/images
 src/static/videos

@@ -6,29 +6,29 @@ const del      = require('del');
 
 const postProcessing = (done) => {
 	// clear
-	del.sync('./public-concat/');
+	del.sync('./build-concat/');
 
 	// html
-	gulp.src('./public/**/*.html')
-		.pipe(gulp.dest('./public-concat/'));
+	gulp.src('./build/**/*.html')
+		.pipe(gulp.dest('./build-concat/'));
 
 	// js
-	gulp.src('./public/scripts/vendors/*.js')
+	gulp.src('./build/scripts/vendors/*.js')
 		.pipe(concat('vendors.js'))
-		.pipe(gulp.dest('./public-concat/scripts/'))
+		.pipe(gulp.dest('./build-concat/scripts/'))
 
-	gulp.src('./public/scripts/*.js')
-		.pipe(gulp.src(['./public/**/*.js', '!./public/scripts/**/*.js']))
+	gulp.src('./build/scripts/*.js')
+		.pipe(gulp.src(['./build/**/*.js', '!./build/scripts/**/*.js']))
 		.pipe(concat('general.js'))
-		.pipe(gulp.dest('./public-concat/scripts/'));
+		.pipe(gulp.dest('./build-concat/scripts/'));
 
 	// css
-	gulp.src('./public/styles/vendors/*.css')
+	gulp.src('./build/styles/vendors/*.css')
 		.pipe(concat('vendors.css'))
-		.pipe(gulp.dest('./public-concat/styles/'))
+		.pipe(gulp.dest('./build-concat/styles/'))
 
-	gulp.src('./public/styles/*.css')
-		.pipe(gulp.src(['./public/**/*.css', '!./public/styles/**/*.css']))
+	gulp.src('./build/styles/*.css')
+		.pipe(gulp.src(['./build/**/*.css', '!./build/styles/**/*.css']))
 		.pipe(concat('general.css'))
 		.pipe(gcmq())
 		.pipe(cleanCss({
@@ -39,11 +39,11 @@ const postProcessing = (done) => {
 				}
 			}
 		}))
-		.pipe(gulp.dest('./public-concat/styles/'));
+		.pipe(gulp.dest('./build-concat/styles/'));
 
-	// statical
-	gulp.src('./public/statical/**/*.*')
-		.pipe(gulp.dest('./public-concat/statical/'));
+	// static
+	gulp.src('./build/static/**/*.*')
+		.pipe(gulp.dest('./build-concat/static/'));
 
 	done();
 }

@@ -5,8 +5,8 @@ import settings from '../config';
 const {paths} = settings;
 
 const clean = () => {
-	// return del([paths.public + '*', '!' + paths.public + 'static']);
-	return del([paths.public + '*']);
+	// return del([paths.build + '*', '!' + paths.build + 'static']);
+	return del([paths.build + '*']);
 }
 
 export default clean;
